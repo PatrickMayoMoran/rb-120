@@ -44,6 +44,16 @@ class Vehicle
   def shut_off
     puts "Car off - don't forget the keys!"
   end
+
+  def how_old?
+    "This #{self.model} is #{age} years old."
+  end
+
+  private
+
+  def age
+    Time.now.year - year
+  end
 end
 
 class MyCar < Vehicle
@@ -64,12 +74,5 @@ class Truck < Vehicle
   end
 end
 
-mocha = MyCar.new('2011', 'maroon', 'CRV')
-mocha.speed_up
-puts mocha.speed
-mocha.brake
-puts mocha.speed
-puts mocha.mileage(3,60)
-puts mocha
-puts mocha.spray_paint("Shiny Maroon")
-puts mocha
+mocha = MyCar.new(2011, 'maroon', 'CRV')
+puts mocha.how_old?
