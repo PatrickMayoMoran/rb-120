@@ -60,9 +60,9 @@ class Truck < Vehicle
   TYPE_OF_VEHICLE = 'Cargo'
 end
 
-mocha = MyCar.new(2011, 'maroon', 'CRV')
-truck = Truck.new(2015, 'silver', 'F150')
-puts mocha
-puts truck
-puts Vehicle.number_of_vehicles
-puts truck.haul("Barley")
+puts "---Truck ancestors---"
+puts Truck.ancestors
+puts "---Vehicle ancestors ---"
+puts Vehicle.ancestors
+puts '---MyCar ancestors----'
+puts MyCar.ancestors
