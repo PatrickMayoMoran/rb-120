@@ -9,10 +9,11 @@ class GoodDog
   def speak
     "#{name} says arf!"
   end
+
+  def self.what_am_i
+    "I'm a GoodDog class!"
+  end
+
 end
 
-sparky = GoodDog.new("Sparky")
-puts sparky.speak
-puts sparky.name
-sparky.name = "Spartacus"
-puts sparky.name
+puts GoodDog.what_am_i
