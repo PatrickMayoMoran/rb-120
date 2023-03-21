@@ -7,7 +7,7 @@ class GoodDog
 
 
   def speak
-    "#{@name} says arf!"
+    "#{name} says arf!"
   end
 end
 
