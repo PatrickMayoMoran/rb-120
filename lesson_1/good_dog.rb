@@ -12,7 +12,13 @@ class HumanBeing
   include Speak
 end
 
-sparky = GoodDog.new
-sparky.speak('Arf!')
-bob = HumanBeing.new
-bob.speak('Hello!')
+# sparky = GoodDog.new
+# sparky.speak('Arf!')
+# bob = HumanBeing.new
+# bob.speak('Hello!')
+
+puts "---GoodDog ancestors---"
+puts GoodDog.ancestors
+puts ''
+puts "---HumanBeing ancestors ---"
+puts HumanBeing.ancestors
