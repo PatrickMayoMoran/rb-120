@@ -16,6 +16,10 @@ class GoodDog
     "#{name} says arf!"
   end
 
+  def to_s
+    "This dog's name is #{name} and its age is #{age}."
+  end
+
   def self.what_am_i
     "I'm a GoodDog class!"
   end
@@ -27,5 +31,5 @@ class GoodDog
 end
 
 sparky = GoodDog.new("Sparky", 4)
-puts sparky.age
 puts sparky
+p sparky
