@@ -1,3 +1,9 @@
+module Towable
+  def haul(object)
+    "Now, you're hauling #{object}."
+  end
+end
+
 class Vehicle
   attr_accessor :speed, :color
   attr_reader :year, :model
@@ -50,6 +56,7 @@ class MyCar < Vehicle
 end
 
 class Truck < Vehicle
+  include Towable
   TYPE_OF_VEHICLE = 'Cargo'
 end
 
@@ -58,3 +65,4 @@ truck = Truck.new(2015, 'silver', 'F150')
 puts mocha
 puts truck
 puts Vehicle.number_of_vehicles
+puts truck.haul("Barley")
