@@ -1,8 +1,7 @@
 class Animal
   attr_accessor :name
 
-  def initialize(name)
-    self.name = name
+  def initialize
   end
 
   def speak
@@ -27,11 +26,11 @@ end
 class Cat < Animal
 end
 
-class BadDog < Animal
-  def initialize(age, name)
-    super(name)
-    @age = age
+class Bear < Animal
+  def initialize(color)
+    super()
+    @color = color
   end
 end
 
-p BadDog.new(2, "Bear")
+p Bear.new("brown")
