@@ -1,36 +1,29 @@
-class Animal
-  attr_accessor :name
-
-  def initialize
-  end
-
-  def speak
-    "Hello!"
+module Swimmable
+  def swim
+    "I'm swimming!"
   end
 end
 
-class GoodDog < Animal
-  attr_accessor :name, :color
+class Animal; end
 
-  def initialize(color)
-    super
-     self.color = color
-  end
-
-  def speak
-    super + " from GoodDog class!"
-  end
-
+class Fish < Animal
+  include Swimmable
 end
 
-class Cat < Animal
+class Mammal < Animal
 end
 
-class Bear < Animal
-  def initialize(color)
-    super()
-    @color = color
-  end
+class Dog < Mammal
+  include Swimmable
 end
 
-p Bear.new("brown")
+class Cat < Mammal
+end
+
+sparky = Dog.new
+nemo = Fish.new
+paws = Cat.new
+
+p sparky.swim
+p nemo.swim
+p paws.swim
