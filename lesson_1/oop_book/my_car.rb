@@ -1,6 +1,6 @@
 class MyCar
   attr_accessor :speed, :color
-  attr_reader :year
+  attr_reader :year, :model
   
   def initialize(year, color, model)
     @year = year
@@ -28,17 +28,15 @@ class MyCar
     puts "Your car is now #{color}"
   end
 
+  def self.mileage(gallons, miles)
+    "This car gets #{miles/gallons} miles per gallon."
+  end
+
+  def to_s
+    "#{self.color} #{self.year} #{self.model}"
+  end
+
 end
 
-mocha = MyCar.new(2011, 'maroon', 'Honda')
-puts mocha.speed
-puts "Speeding up..."
-mocha.speed_up
-puts mocha.speed
-puts "Slowing down..."
-mocha.brake
-puts mocha.speed
-mocha.spray_paint('Lime Green')
-puts mocha.color
-puts "Time for rest"
-mocha.shut_off
+mocha = MyCar.new(2011, 'maroon', 'CRV')
+puts mocha
