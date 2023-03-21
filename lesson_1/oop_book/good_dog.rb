@@ -3,11 +3,11 @@ class GoodDog
     @name = name
   end
 
-  def get_name
+  def name
     @name
   end
 
-  def set_name=(name)
+  def name=(name)
     @name = name
   end
 
@@ -18,6 +18,6 @@ end
 
 sparky = GoodDog.new("Sparky")
 puts sparky.speak
-puts sparky.get_name
-sparky.set_name = "Spartacus"
-puts sparky.get_name
+puts sparky.name
+sparky.name = "Spartacus"
+puts sparky.name
