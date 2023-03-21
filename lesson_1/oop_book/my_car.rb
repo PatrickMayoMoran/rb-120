@@ -23,6 +23,7 @@ class Vehicle
 end
 
 class MyCar < Vehicle
+  TYPE_OF_VEHICLE = 'Passenger'
 
   def spray_paint(color)
     puts "Your car is currently #{self.color}"
@@ -41,5 +42,11 @@ class MyCar < Vehicle
 
 end
 
+class Truck < Vehicle
+  TYPE_OF_VEHICLE = 'Cargo'
+end
+
 mocha = MyCar.new(2011, 'maroon', 'CRV')
+truck = Truck.new(2015, 'silver', 'F150')
 puts mocha
+puts truck
