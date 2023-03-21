@@ -1,7 +1,7 @@
-class MyCar
+class Vehicle
   attr_accessor :speed, :color
   attr_reader :year, :model
-  
+
   def initialize(year, color, model)
     @year = year
     @color = color
@@ -20,6 +20,9 @@ class MyCar
   def shut_off
     puts "Car off - don't forget the keys!"
   end
+end
+
+class MyCar < Vehicle
 
   def spray_paint(color)
     puts "Your car is currently #{self.color}"
@@ -33,7 +36,7 @@ class MyCar
   end
 
   def to_s
-    "#{self.color} #{self.year} #{self.model}"
+    "My car is a #{self.color} #{self.year} #{self.model}."
   end
 
 end
