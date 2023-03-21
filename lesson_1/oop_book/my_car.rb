@@ -30,6 +30,17 @@ class Vehicle
     self.speed = 60
   end
 
+  def spray_paint(color)
+    puts "Your vehicle is currently #{self.color}"
+    puts "changing color..."
+    self.color = color
+    puts "Your vehicle is now #{color}"
+  end
+
+  def mileage(gallons, miles)
+    "#{miles/gallons} miles per gallon."
+  end
+
   def shut_off
     puts "Car off - don't forget the keys!"
   end
@@ -37,17 +48,6 @@ end
 
 class MyCar < Vehicle
   TYPE_OF_VEHICLE = 'Passenger'
-
-  def spray_paint(color)
-    puts "Your car is currently #{self.color}"
-    puts "changing color of the car..."
-    self.color = color
-    puts "Your car is now #{color}"
-  end
-
-  def self.mileage(gallons, miles)
-    "This car gets #{miles/gallons} miles per gallon."
-  end
 
   def to_s
     "My car is a #{self.color} #{self.year} #{self.model}."
@@ -58,11 +58,18 @@ end
 class Truck < Vehicle
   include Towable
   TYPE_OF_VEHICLE = 'Cargo'
+
+  def to_s
+    "My truck is a #{self.color} #{self.year} #{self.model}."
+  end
 end
 
-puts "---Truck ancestors---"
-puts Truck.ancestors
-puts "---Vehicle ancestors ---"
-puts Vehicle.ancestors
-puts '---MyCar ancestors----'
-puts MyCar.ancestors
+mocha = MyCar.new('2011', 'maroon', 'CRV')
+mocha.speed_up
+puts mocha.speed
+mocha.brake
+puts mocha.speed
+puts mocha.mileage(3,60)
+puts mocha
+puts mocha.spray_paint("Shiny Maroon")
+puts mocha
