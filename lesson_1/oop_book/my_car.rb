@@ -2,11 +2,18 @@ class Vehicle
   attr_accessor :speed, :color
   attr_reader :year, :model
 
+  @@number_of_vehicles = 0
+
   def initialize(year, color, model)
     @year = year
     @color = color
     @model = model
     @speed = 0
+    @@number_of_vehicles += 1
+  end
+
+  def self.number_of_vehicles
+    @@number_of_vehicles
   end
 
   def brake
@@ -50,3 +57,4 @@ mocha = MyCar.new(2011, 'maroon', 'CRV')
 truck = Truck.new(2015, 'silver', 'F150')
 puts mocha
 puts truck
+puts Vehicle.number_of_vehicles
