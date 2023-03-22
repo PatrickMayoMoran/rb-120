@@ -1,3 +1,9 @@
+module Towable
+  def tow
+    puts "I can tow a trailer!"
+  end
+end
+
 class Vehicle
   attr_reader :year
 
@@ -12,6 +18,8 @@ class Vehicle
 end
 
 class Truck < Vehicle
+  include Towable
+
   attr_reader :bed_type
 
   def initialize(year, bed_type)
@@ -29,4 +37,4 @@ class Car < Vehicle
 end
 
 truck1 = Truck.new(1994, 'Short')
-puts truck1.start_engine('fast')
+truck1.tow
