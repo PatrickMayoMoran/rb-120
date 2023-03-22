@@ -1,15 +1,15 @@
 class Cat
-  attr_accessor :name
+  attr_reader :name
 
   def initialize(name)
     @name = name
   end
 
-  def identify
-    self
+  def to_s
+    "I'm #{name}!"
   end
 
 end
 
 kitty = Cat.new('Sophie')
-p kitty.identify
+puts kitty
