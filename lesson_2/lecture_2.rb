@@ -13,8 +13,8 @@ class Person
 
   def name=(name)
     parts = name.strip.split
-    @first_name = parts.first
-    @last_name = parts.size > 1 ? parts.last : ''
+    self.first_name = parts.first
+    self.last_name = parts.size > 1 ? parts.last : ''
   end
 
 end
