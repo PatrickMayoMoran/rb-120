@@ -1,13 +1,21 @@
 class Person
-  attr_accessor :name
+  attr_reader :first_name
+  attr_accessor :last_name
 
-  def initialize(name)
-    @name = name
+  def initialize(first_name)
+    @first_name = first_name
+    @last_name = ''
+  end
+
+  def name
+    first_name + ' ' + last_name
   end
 
 end
 
-bob = Person.new('bob')
-p bob.name                  # => 'bob'
-p bob.name = 'Robert'
+p bob = Person.new('Robert')
 p bob.name                  # => 'Robert'
+p bob.first_name            # => 'Robert'
+p bob.last_name             # => ''
+p bob.last_name = 'Smith'
+p bob.name                  # => 'Robert Smith'
