@@ -7,8 +7,8 @@ end
 
 class Cat < Pet
   def initialize(name, age, fur)
-    @fur = fur
     super(name, age)
+    @fur = fur
   end
 
   def to_s
