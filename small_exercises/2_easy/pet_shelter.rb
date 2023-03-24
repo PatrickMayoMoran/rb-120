@@ -6,6 +6,10 @@ class Pet
     @name = name
   end
 
+  def to_s
+    "a #{animal} named #{name}"
+  end
+
 end
 
 class Owner
@@ -21,6 +25,18 @@ class Owner
     pets.size
   end
 
+  def print_pets
+    puts pets
+  end
+
+  def add_pet(pet)
+    pets << pet
+  end
+
+  def to_s
+    name
+  end
+
 end
 
 class Shelter
@@ -31,16 +47,14 @@ class Shelter
 
   def adopt(owner, pet)
     owners << owner if !owners.include?(owner)
-    owner.pets << pet
+    owner.add_pet(pet)
   end
 
   def print_adoptions
     owners.each do |owner|
-      puts "#{owner.name} has adopted the following pets:"
-      owner.pets.each do |pet|
-        puts "a #{pet.animal} named #{pet.name}"
-      end
-      puts ''
+      puts "#{owner} has adopted the following pets:"
+      owner.print_pets
+      puts
     end
   end
 
