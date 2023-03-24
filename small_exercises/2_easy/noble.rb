@@ -1,7 +1,7 @@
 module Walkable
 
   def walk
-    puts "#{format_name} #{gait} forward"
+    puts "#{self} #{gait} forward"
   end
 
 end
@@ -16,8 +16,8 @@ include Walkable
     @name = name
   end
 
-  def format_name
-    "#{@name}"
+  def to_s
+    "#{name}"
   end
 
 
@@ -36,8 +36,8 @@ class Noble < Person
     @title = title
   end
 
-  def format_name
-    "#{@title} #{@name}"
+  def to_s
+    "#{title} #{name}"
   end
 
   private
@@ -58,8 +58,8 @@ include Walkable
     @name = name
   end
 
-  def format_name
-    "#{@name}"
+  def to_s
+    "#{name}"
   end
 
 
@@ -80,8 +80,8 @@ include Walkable
     @name = name
   end
 
-  def format_name
-    "#{@name}"
+  def to_s
+    "#{name}"
   end
 
 
