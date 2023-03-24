@@ -1,8 +1,7 @@
-
 module Walkable
 
   def walk
-    puts "#{name} #{gait} forward"
+    puts "#{format_name} #{gait} forward"
   end
 
 end
@@ -17,11 +16,36 @@ include Walkable
     @name = name
   end
 
+  def format_name
+    "#{@name}"
+  end
+
+
   private
 
   def gait
     "strolls"
   end
+end
+
+class Noble < Person
+  attr_reader :title, :name
+
+  def initialize(name, title)
+    super(name)
+    @title = title
+  end
+
+  def format_name
+    "#{@title} #{@name}"
+  end
+
+  private
+
+  def gait
+    "struts"
+  end
+
 end
 
 class Cat
@@ -33,6 +57,11 @@ include Walkable
   def initialize(name)
     @name = name
   end
+
+  def format_name
+    "#{@name}"
+  end
+
 
   private
 
@@ -50,6 +79,11 @@ include Walkable
   def initialize(name)
     @name = name
   end
+
+  def format_name
+    "#{@name}"
+  end
+
 
   private
 
