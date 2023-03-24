@@ -9,23 +9,44 @@ class Pet
 end
 
 class Owner
-  attr_accessor :pets
-  attr_reader :name
+
+  attr_reader :name, :pets
 
   def initialize(name)
     @name = name
     @pets = []
   end
 
+  def number_of_pets
+    pets.size
+  end
+
 end
 
 class Shelter
 
+  def initialize
+    @owners = []
+  end
+
   def adopt(owner, pet)
+    owners << owner if !owners.include?(owner)
+    owner.pets << pet
   end
 
   def print_adoptions
+    owners.each do |owner|
+      puts "#{owner.name} has adopted the following pets:"
+      owner.pets.each do |pet|
+        puts "a #{pet.animal} named #{pet.name}"
+      end
+      puts ''
+    end
   end
+
+  private
+
+  attr_reader :owners
 
 end
 
