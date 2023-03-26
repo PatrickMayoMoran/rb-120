@@ -1,9 +1,35 @@
 class Move
+  include Comparable
+  attr_reader :value
+
   VALUES = ['rock', 'paper', 'scissors']
 
   def initialize(value)
     @value = value
   end
+
+  def <=>(other)
+    return 0 if value == other.value
+    return 1 if self.beats?(other.value)
+    -1
+  end
+
+  def beats?(value)
+    if @value == 'rock' && value == 'scissors'
+      return true
+    elsif @value == 'paper' && value == 'rock'
+      return true
+    elsif @value == 'scissors' && value == 'paper'
+      return true
+    else
+      return false
+    end
+  end
+
+  def to_s
+    @value
+  end
+
 end
 
 class Player
@@ -72,19 +98,12 @@ class RPSGame
     puts "#{human.name} chose #{human.move}"
     puts "#{computer.name} chose #{computer.move}"
 
-    case human.move
-    when 'paper'
-      puts "#{human.name} won!" if computer.move == 'rock'
-      puts "#{human.name} lost!" if computer.move == 'scissors'
-      puts "It's a tie!" if computer.move == 'paper'
-    when 'rock'
-      puts "#{human.name} won!" if computer.move == 'scissors'
-      puts "#{human.name} lost!" if computer.move == 'paper'
-      puts "It's a tie!" if computer.move == 'rock'
-    when 'scissors'
-      puts "#{human.name} won!" if computer.move == 'paper'
-      puts "#{human.name} lost!" if computer.move == 'rock'
-      puts "It's a tie!" if computer.move == 'scissors'
+    if human.move > computer.move
+      puts "#{human.name} won!"
+    elsif computer.move > human.move
+      puts "#{computer.name} won!"
+    else
+      puts "It's a tie!"
     end
   end
 
