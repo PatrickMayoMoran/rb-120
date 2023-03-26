@@ -10,26 +10,20 @@ class Move
 
   def <=>(other)
     return 0 if value == other.value
-    return 1 if self.beats?(other.value)
+    return 1 if beats?(other.value)
     -1
   end
 
   def beats?(value)
-    if @value == 'rock' && value == 'scissors'
-      return true
-    elsif @value == 'paper' && value == 'rock'
-      return true
-    elsif @value == 'scissors' && value == 'paper'
-      return true
-    else
-      return false
-    end
+    return true if @value == 'rock' && value == 'scissors'
+    return true if @value == 'paper' && value == 'rock'
+    return true if @value == 'scissors' && value == 'paper'
+    false
   end
 
   def to_s
     @value
   end
-
 end
 
 class Player
