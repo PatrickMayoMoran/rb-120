@@ -22,6 +22,11 @@ class GeoLocation
   def to_s
     "(#{latitude}, #{longitude})"
   end
+
+  def ==(other_location)
+    latitude == other_location.latitude &&
+    longitude == other_location.longitude
+  end
 end
 
 # Example
