@@ -1,5 +1,6 @@
 class Vehicle
   attr_accessor :speed, :heading
+  attr_writer :fuel_efficiency, :fuel_capacity
 
   def initialize(km_traveled_per_liter, liters_of_fuel_capacity)
     @fuel_efficiency = km_traveled_per_liter
