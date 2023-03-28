@@ -1,7 +1,7 @@
 class Cat
 
   def be_cute
-    self.meow
+    self.meow # this was illegal before Ruby 2.7; is now okay!
   end
 
   def talk(other)
