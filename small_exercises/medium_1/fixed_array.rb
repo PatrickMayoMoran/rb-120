@@ -1,3 +1,6 @@
+class FixedArray < Array
+end
+
 fixed_array = FixedArray.new(5)
 puts fixed_array[3] == nil
 puts fixed_array.to_a == [nil] * 5
