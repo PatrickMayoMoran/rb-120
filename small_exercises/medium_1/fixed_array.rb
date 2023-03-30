@@ -1,14 +1,43 @@
-class FixedArray < Array
+# SOLUTION 1 - Inheriting from Array; considered bad practice!
+# class FixedArray < Array
+# 
+#   def []=(index, new_value)
+#     raise IndexError if index >= self.size
+#     super
+#   end
+# 
+#   def [](index)
+#     raise IndexError if index >= self.size
+#     super
+#   end
+# end
 
-  def []=(index, new_value)
-    raise IndexError if index >= self.size
-    super
+# OPTION 2 - Use an array as a collaborator object
+class FixedArray
+  
+  def initialize(size)
+    @fixed = Array.new(size)
   end
 
   def [](index)
-    raise IndexError if index >= self.size
-    super
+    fixed.fetch(index)
   end
+
+  def []=(index, element)
+    self[index]
+    fixed[index] = element
+  end
+
+  def to_a
+    fixed.clone
+  end
+
+  def to_s
+    fixed.to_s
+  end
+
+  private
+  attr_reader :fixed
 end
 
 fixed_array = FixedArray.new(5)
