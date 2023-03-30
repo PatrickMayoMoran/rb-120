@@ -1,4 +1,14 @@
 class FixedArray < Array
+
+  def []=(index, new_value)
+    raise IndexError if index >= self.size
+    super
+  end
+
+  def [](index)
+    raise IndexError if index >= self.size
+    super
+  end
 end
 
 fixed_array = FixedArray.new(5)
