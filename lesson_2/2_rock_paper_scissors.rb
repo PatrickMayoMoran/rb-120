@@ -147,6 +147,7 @@ class Type
       end
 
     type = TYPES[choice]
+    puts "You chose #{type}."
     continue
     return type
   end
