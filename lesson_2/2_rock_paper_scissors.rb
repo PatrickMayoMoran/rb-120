@@ -117,13 +117,17 @@ class Type
       self.display
       puts "Enter 1, 2, or 3 to read the rules for that type. Enter anything else to continue."
       choice = gets.chomp.to_i
-      break unless TYPES.key?(choice)
+      break unless valid?(choice)
 
       type = TYPES[choice]
       puts type.rules
       continue
     end
     system 'clear'
+  end
+
+  def self.valid?(choice)
+    TYPES.key?(choice)
   end
 
   def self.display
@@ -134,9 +138,9 @@ class Type
     choice = nil
     loop do
       puts "Please enter 1, 2, or 3 to choose your game type:"
-      display
+      self.display
       choice = gets.chomp.to_i
-      break if TYPES.key?(choice)
+      break if valid?(choice)
 
       system 'clear'
       puts "Not a valid choice, please choose again."
