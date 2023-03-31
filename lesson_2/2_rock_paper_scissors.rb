@@ -38,6 +38,10 @@ class Game
     play until winner?
   end
 
+  def winner?
+    player.score == score || computer.score == score
+  end
+
   def choose_score
     puts "What score would you like to play to?"
     choice = nil
