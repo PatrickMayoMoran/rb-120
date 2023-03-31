@@ -39,7 +39,7 @@ class Game
   end
 
   def winner?
-    player.score == score || computer.score == score
+    person.score == score || computer.score == score
   end
 
   def choose_score
