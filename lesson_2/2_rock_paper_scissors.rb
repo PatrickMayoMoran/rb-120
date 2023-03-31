@@ -36,9 +36,25 @@ class Game
     play
   end
 
+  def choose_score
+    puts "What score would you like to play to?"
+    choice = nil
+    loop do
+      puts <<~HEREDOC
+      1) Best of 1
+      3) Best of 3
+      5) Best of 5
+      HEREDOC
+      choice = gets.chomp.to_i
+      break if [1,3,5].include?(choice)
+      puts "Not a valid choice - please choose 1, 3, or 5."
+    end
+    choice
+  end
+
   def choose_type
     Type.explain
-    @type = Type.choose
+    Type.choose
   end
 
   def play
@@ -47,11 +63,11 @@ class Game
     round until winner?
   end
 
-  def round
-  end
+  #def round
+  #end
 
-  def winner?
-  end
+  #def winner?
+  #end
 end
 
 
