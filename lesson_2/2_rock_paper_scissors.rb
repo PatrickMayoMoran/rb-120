@@ -108,25 +108,43 @@ class RPSSL
 end
 
 class Type
-  CHOICES = {1 => Classic, 2 => RoShamBo, 3 => RPSSL}
-
+  TYPES = {1 => Classic, 2 => RoShamBo, 3 => RPSSL}
 
   def self.explain
     choice = nil
     loop do
       puts "There are three types of game to choose from: "
-      CHOICES.each {|k,t| puts "#{k}: #{t.name}" }
+      display
       puts "Enter 1, 2, or 3 to read the rules for that type. Enter anything else to continue."
       choice = gets.chomp.to_i
-      break unless CHOICES.key?(choice)
+      break unless TYPES.key?(choice)
 
-      type = CHOICES[choice]
+      type = TYPES[choice]
       puts type.rules
       continue
     end
+    system 'clear'
+  end
+
+  def self.display
+    TYPES.each {|k,t| puts "#{k}: #{t.name}" }
   end
 
   def self.choose
+    choice = nil
+    loop do
+      puts "Please enter 1, 2, or 3 to choose your game type:"
+      display
+      choice = gets.chomp.to_i
+      break if TYPES.key?(choice)
+
+      system 'clear'
+      puts "Not a valid choice, please choose again."
+      end
+
+    type = TYPES[choice]
+    continue
+    return type
   end
 
 end
