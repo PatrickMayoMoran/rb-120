@@ -19,6 +19,10 @@ class Engine
     puts "Welcome to Rock Paper Scissors!"
   end
 
+  def farewell
+    puts "Thanks for playing - Goodbye!"
+  end
+
 end
 
 class Game
@@ -28,8 +32,6 @@ class Game
     @rules = type.rules
 
     play
-    # play_again?
-    goodbye
   end
 
   def choose_type
