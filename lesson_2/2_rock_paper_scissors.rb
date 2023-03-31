@@ -5,9 +5,24 @@ def continue
   system 'clear'
 end
 
-class Game
+class Engine
   def initialize
     greet
+    loop do
+      Game.new
+      break unless play_again?
+    end
+    farewell
+  end
+
+  def greet
+    puts "Welcome to Rock Paper Scissors!"
+  end
+
+end
+
+class Game
+  def initialize
     @type = choose_type
     @score = choose_score
     @rules = type.rules
@@ -16,11 +31,6 @@ class Game
     # play_again?
     goodbye
   end
-
-  def greet
-    puts "Welcome to Rock Paper Scissors!"
-  end
-
 
   def choose_type
     Type.explain
@@ -156,4 +166,4 @@ end
 class Computer < Player
 end
 
-Game.new
+Engine.new
