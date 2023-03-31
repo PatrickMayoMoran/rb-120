@@ -114,9 +114,9 @@ class Type
   def self.explain
     choice = nil
     loop do
-      puts "There are three types of games: "
+      puts "There are three types of game to choose from: "
       CHOICES.each {|k,t| puts "#{k}: #{t.name}" }
-      puts "Enter 1, 2, or 3 to read a description of that variation. Enter anything else to continue."
+      puts "Enter 1, 2, or 3 to read the rules for that variation. Enter anything else to continue."
       choice = gets.chomp.to_i
       break unless CHOICES.key?(choice)
 
