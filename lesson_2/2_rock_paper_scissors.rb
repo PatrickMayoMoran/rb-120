@@ -64,7 +64,10 @@ class Game
   end
 
   def play
-    
+    p = person.move
+    c = computer.move
+    person.score += 1 if p > c
+    computer.score += 1 if c > p
   end
 
   #def winner?
@@ -202,6 +205,8 @@ class Water < Move
 end
 
 class Player
+  attr_accessor :score
+
   def initialize
     @name = get_name
   end
