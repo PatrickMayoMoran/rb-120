@@ -28,12 +28,14 @@ class Engine
 end
 
 class Game
+  attr_reader :person, :type, :score, :computer
   def initialize
+    @person = Person.new
+    @computer = Computer.new
     @type = choose_type
     @score = choose_score
-    @rules = type.rules
 
-    play
+    play until winner?
   end
 
   def choose_score
@@ -62,13 +64,8 @@ class Game
   end
 
   def play
-    person = Person.new
-    computer = Computer.new
-    round until winner?
+    
   end
-
-  #def round
-  #end
 
   #def winner?
   #end
@@ -205,12 +202,40 @@ class Water < Move
 end
 
 class Player
+  def initialize
+    @name = get_name
+  end
 end
 
 class Person < Player
+  attr_accessor :name
+
+  def get_name
+    puts "What's your name?"
+    name = nil
+    loop do
+      name = gets.chomp
+      break if valid?(name)
+      system 'clear'
+      puts "Please enter a valid name."
+    end
+
+    self.name = name
+    puts "Nice to meet you #{name}!"
+    continue
+
+  end
+
+  def valid?(name)
+    !name.empty?
+  end
 end
 
 class Computer < Player
+
+  def get_name
+    @name = ['Mufasa', 'Scar', 'TinyCat'].sample
+  end
 end
 
 Engine.new
