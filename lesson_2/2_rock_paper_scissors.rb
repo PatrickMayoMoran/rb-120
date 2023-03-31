@@ -219,6 +219,10 @@ end
 class Person < Player
   attr_accessor :name
 
+  def move
+    
+  end
+
   def get_name
     puts "What's your name?"
     name = nil
