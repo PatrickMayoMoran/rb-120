@@ -7,7 +7,9 @@ end
 
 class Engine
   def initialize
+    system 'clear'
     greet
+    continue
     loop do
       Game.new
       break unless play_again?
