@@ -114,7 +114,7 @@ class Type
     choice = nil
     loop do
       puts "There are three types of game to choose from: "
-      display
+      self.display
       puts "Enter 1, 2, or 3 to read the rules for that type. Enter anything else to continue."
       choice = gets.chomp.to_i
       break unless TYPES.key?(choice)
