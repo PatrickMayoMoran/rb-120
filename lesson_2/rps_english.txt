@@ -12,3 +12,23 @@ Game:
     score
     type (classic, RoSham, RPSSL)
     players
+  Does
+    Start
+    greet
+    report winner
+    say goodbye
+
+Player
+  Has
+    Name
+  Does
+    Choose move
+
+Move
+  Does
+    Beats other moves
+    Compare with other moves
+
+Score
+  Has
+    Number value
