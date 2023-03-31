@@ -47,8 +47,12 @@ class Game
       HEREDOC
       choice = gets.chomp.to_i
       break if [1,3,5].include?(choice)
+      system 'clear'
       puts "Not a valid choice - please choose 1, 3, or 5."
     end
+
+    puts "You chose #{choice}."
+    continue
     choice
   end
 
