@@ -7,7 +7,6 @@ end
 
 class Engine
   def initialize
-    system 'clear'
     greet
     continue
     loop do
@@ -18,6 +17,7 @@ class Engine
   end
 
   def greet
+    system 'clear'
     puts "Welcome to Rock Paper Scissors!"
   end
 
