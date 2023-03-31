@@ -1,0 +1,14 @@
+Rock, Paper, Scissors is a game where two players each choose a move:
+-Rock, Paper, or Scissors
+Moves are compared and the player with the winning move wins!
+If you want, you can play just a single game, or you can do best of 3, best of
+5, first to 10, etc.
+
+NOUNS: Game, Player, Move, Rock, Paper, Scissors, Score
+VERBS: Compare, choose
+
+Game:
+  Has
+    score
+    type (classic, RoSham, RPSSL)
+    players
