@@ -30,11 +30,11 @@ end
 class Game
   attr_reader :person, :type, :score, :computer, :moves
   def initialize
-    @person = Person.new
-    @computer = Computer.new
+    @moves = [Rock, Paper, Scissors]
+    @person = Person.new(moves)
+    @computer = Computer.new(moves)
     #@type = choose_type
     @score = choose_score
-    @moves = [:rock, :paper, :scissors]
 
     play until winner?
     display_winner
@@ -71,14 +71,12 @@ class Game
   end
 
   def play
-    p = person.move(moves)
-    c = computer.move(moves)
+    p = person.move
+    c = computer.move
     person.score += 1 if p > c
     computer.score += 1 if c > p
   end
 
-  #def winner?
-  #end
 end
 
 
@@ -257,17 +255,37 @@ end
 class Player
   attr_accessor :score
 
-  def initialize
+  def initialize(moves)
     @name = get_name
+    @moves = moves
+  end
+
+  def display_moves
+    moves.each {|k,m| puts "#{k}: #{move}" }
+  end
+
+  def moves
+    choices = {}
+    @moves.each_with_index {|m,i| choices[i+1] = m }
+    choices
   end
 end
 
 class Person < Player
   attr_accessor :name
 
-  def move(moves)
+  def move
     puts "Please choose a move"
-    moves.each { |move| move.display}
+    display_moves
+    choice = nil
+    loop do
+      choice = gets.chomp.to_i
+      break choice if moves.key?(choice)
+      system 'clear'
+      "Not valid - please enter the number of your choice."
+    end
+    puts "You chose #{moves[choice]}"
+    continue
   end
 
   def get_name
