@@ -28,14 +28,17 @@ class Engine
 end
 
 class Game
-  attr_reader :person, :type, :score, :computer
+  attr_reader :person, :type, :score, :computer, :moves
   def initialize
     @person = Person.new
     @computer = Computer.new
-    @type = choose_type
+    #@type = choose_type
     @score = choose_score
+    @moves = [:rock, :paper, :scissors]
 
     play until winner?
+    display_winner
+    continue
   end
 
   def winner?
