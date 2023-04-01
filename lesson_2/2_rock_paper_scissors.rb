@@ -186,9 +186,21 @@ class Move
   include Comparable
 
   def <=>(other)
-    1 if self.beats?(other)
-    0 if self.class == other.class
-    -1
+    1  if self.beats?(other)
+    -1 if self.loses?(other)
+    0  if self.ties?(other)
+  end
+
+  def beats?(other)
+    true if beats.include?(other.class)
+  end
+
+  def loses?(other)
+    true if loses.include?(other.class)
+  end
+
+  def ties?(other)
+    self.class == other.class
   end
 
 end
@@ -196,27 +208,50 @@ end
 class Rock < Move
   def initialize
     @beats = [Scissors, Lizard, Water]
-    @ties = [Rock]
     @loses = [Paper, Spock, Fire]
   end
 end
 
 class Scissors < Move
+  def initialize
+    @beats = [Paper, Lizard, Water]
+    @loses = [Rock, Spock, Fire]
+  end
 end
 
 class Paper < Move
+  def initialize
+    @beats = [Rock, Spock, Water]
+    @loses = [Scissors, Lizard, Fire]
+  end
 end
 
 class Spock < Move
+  def initialize
+    @beats = [Rock, Scissors, Water]
+    @loses = [Paper, Lizard, Fire]
+  end
 end
 
 class Lizard < Move
+  def initialize
+    @beats = [Paper, Spock, Water]
+    @loses = [Rock, Scissors, Fire]
+  end
 end
 
 class Fire < Move
+  def initialize
+    @beats = [Paper, Spock, Rock, Scissors, Lizard]
+    @loses = [Water]
+  end
 end
 
 class Water < Move
+  def initialize
+    @beats = [Fire]
+    @loses = [Paper, Spock, Rock, Scissors, Lizard]
+  end
 end
 
 class Player
