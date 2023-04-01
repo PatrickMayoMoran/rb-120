@@ -183,6 +183,14 @@ end
 
 
 class Move
+  include Comparable
+
+  def <=>(other)
+    1 if self.beats?(other)
+    0 if self.class == other.class
+    -1
+  end
+
 end
 
 class Rock < Move
