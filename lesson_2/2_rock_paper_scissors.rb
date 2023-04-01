@@ -30,13 +30,22 @@ end
 class Game
   attr_reader :person, :type, :score, :computer, :moves
   def initialize
+<<<<<<< HEAD
     @type = choose_type.new
     @moves = type.moves
     @person = Person.new(moves)
     @computer = Computer.new(moves)
+=======
+    @person = Person.new
+    @computer = Computer.new
+    #@type = choose_type
+>>>>>>> development
     @score = choose_score
+    @moves = [:rock, :paper, :scissors]
 
     play until winner?
+    display_winner
+    continue
   end
 
   def winner?
@@ -69,8 +78,8 @@ class Game
   end
 
   def play
-    p = person.move
-    c = computer.move
+    p = person.move(moves)
+    c = computer.move(moves)
     person.score += 1 if p > c
     computer.score += 1 if c > p
   end
@@ -195,32 +204,75 @@ end
 
 
 class Move
+  include Comparable
+
+  def <=>(other)
+    1  if self.beats?(other)
+    -1 if self.loses?(other)
+    0  if self.ties?(other)
+  end
+
+  def beats?(other)
+    true if beats.include?(other.class)
+  end
+
+  def loses?(other)
+    true if loses.include?(other.class)
+  end
+
+  def ties?(other)
+    self.class == other.class
+  end
+
 end
 
 class Rock < Move
   def initialize
     @beats = [Scissors, Lizard, Water]
-    @ties = [Rock]
     @loses = [Paper, Spock, Fire]
   end
 end
 
 class Scissors < Move
+  def initialize
+    @beats = [Paper, Lizard, Water]
+    @loses = [Rock, Spock, Fire]
+  end
 end
 
 class Paper < Move
+  def initialize
+    @beats = [Rock, Spock, Water]
+    @loses = [Scissors, Lizard, Fire]
+  end
 end
 
 class Spock < Move
+  def initialize
+    @beats = [Rock, Scissors, Water]
+    @loses = [Paper, Lizard, Fire]
+  end
 end
 
 class Lizard < Move
+  def initialize
+    @beats = [Paper, Spock, Water]
+    @loses = [Rock, Scissors, Fire]
+  end
 end
 
 class Fire < Move
+  def initialize
+    @beats = [Paper, Spock, Rock, Scissors, Lizard]
+    @loses = [Water]
+  end
 end
 
 class Water < Move
+  def initialize
+    @beats = [Fire]
+    @loses = [Paper, Spock, Rock, Scissors, Lizard]
+  end
 end
 
 class Player
@@ -235,8 +287,9 @@ end
 class Person < Player
   attr_accessor :name
 
-  def move
-    
+  def move(moves)
+    puts "Please choose a move"
+    moves.each { |move| move.display}
   end
 
   def get_name

@@ -8,9 +8,11 @@ NOUNS: Game, Player, Move, Rock, Paper, Scissors, Score
 VERBS: Compare, choose
 
 Game:
+  Is
+    Type (classic, RoSham, RPSSL)
   Has
     score
-    type (classic, RoSham, RPSSL)
+    moves_allowed
     players
   Does
     Start
