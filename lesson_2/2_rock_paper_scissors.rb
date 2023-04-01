@@ -28,11 +28,12 @@ class Engine
 end
 
 class Game
-  attr_reader :person, :type, :score, :computer
+  attr_reader :person, :type, :score, :computer, :moves
   def initialize
-    @person = Person.new
-    @computer = Computer.new
-    @type = choose_type
+    @type = choose_type.new
+    @moves = type.moves
+    @person = Person.new(moves)
+    @computer = Computer.new(moves)
     @score = choose_score
 
     play until winner?
@@ -80,6 +81,7 @@ end
 
 
 class Classic
+  attr_reader :moves
   def initialize
     @moves = [:rock, :paper, :scissors]
   end
@@ -98,6 +100,12 @@ class Classic
 end
 
 class RoShamBo
+  attr_reader :moves
+
+  def initialize
+    @moves = [:rock, :paper, :scissors, :fire, :water]
+  end
+
   def self.rules
   <<~HEREDOC
   RoShamBo works as follows:
@@ -116,6 +124,12 @@ class RoShamBo
 end
 
 class RPSSL
+  attr_reader :moves
+
+  def initialize
+    @moves = [:rock, :paper, :scissors, :spock, :lizard]
+  end
+
   def self.rules
     <<~HEREDOC
     Rock, Paper, Scissors, Spock, Lizard works as follows:
@@ -132,7 +146,8 @@ class RPSSL
 end
 
 class Type
-  TYPES = {1 => Classic, 2 => RoShamBo, 3 => RPSSL}
+
+  attr_reader :moves
 
   def self.explain
     choice = nil
@@ -211,8 +226,9 @@ end
 class Player
   attr_accessor :score
 
-  def initialize
+  def initialize(moves)
     @name = get_name
+    @moves = moves
   end
 end
 
