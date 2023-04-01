@@ -49,7 +49,16 @@ class CircularQueue
   end
 
   def find_open_spot
-    queue.index(nil)
+    if queue.any?(nil)
+      queue.index(nil)
+    else
+      queue.index(oldest)
+    end
+  end
+
+  def oldest
+    times = tracker.select {|el| el.class == Time}
+    tracker.index(times.min)
   end
 
   def enqueue(element)
@@ -60,6 +69,10 @@ class CircularQueue
 
   def dequeue
     return nil if queue.all?(nil)
+    el = queue[oldest]
+    queue[oldest] = nil
+    tracker[oldest] = nil
+    el
   end
 
   private
@@ -71,9 +84,9 @@ end
 queue = CircularQueue.new(3)
 puts queue.dequeue == nil
 
-p queue.enqueue(1)
-# queue.enqueue(2)
-# puts queue.dequeue == 1
+queue.enqueue(1)
+queue.enqueue(2)
+puts queue.dequeue == 1
 # 
 # queue.enqueue(3)
 # queue.enqueue(4)
