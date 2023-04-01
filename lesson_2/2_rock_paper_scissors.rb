@@ -71,8 +71,8 @@ class Game
   end
 
   def play
-    p = person.move
-    c = computer.move
+    p = person.move(moves)
+    c = computer.move(moves)
     person.score += 1 if p > c
     computer.score += 1 if c > p
   end
@@ -222,8 +222,9 @@ end
 class Person < Player
   attr_accessor :name
 
-  def move
-    
+  def move(moves)
+    puts "Please choose a move"
+    moves.each { |move| move.display}
   end
 
   def get_name
