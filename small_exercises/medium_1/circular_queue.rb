@@ -52,12 +52,12 @@ class CircularQueue
     queue.all?(nil)
   end
   
-  def open?
+  def open_spot?
     queue.any?(nil)
   end
 
   def find_open_spot
-    if open?
+    if open_spot?
       queue.index(nil)
     else
       oldest
