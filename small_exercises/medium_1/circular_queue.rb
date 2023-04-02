@@ -60,7 +60,7 @@ class CircularQueue
     queue.index(nil)
   end
 
-  def find_open_spot
+  def find_insert_spot
     if open_spot?
       open_index
     else
@@ -77,12 +77,10 @@ class CircularQueue
   end
 
   def enqueue(element)
-    i = find_open_spot
+    i = find_insert_spot
     tracker[i] = Time.now
     queue[i] = element
   end
-  
-  
 
   def dequeue
     return nil if empty?
