@@ -12,8 +12,6 @@ class Graduate < Student
   end
 end
 
-class Undergraduate < Student
-  def initialize(name, year)
-    super
-  end
+class Undergraduate < Student #no need to call super from initialize method
+# Since they're identical, we can leave initialize out entirely
 end
