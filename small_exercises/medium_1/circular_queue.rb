@@ -69,9 +69,13 @@ class CircularQueue
     tracker[i] = Time.now
     queue[i] = element
   end
+  
+  def empty?
+    queue.all?(nil)
+  end
 
   def dequeue
-    return nil if queue.all?(nil)
+    return nil if empty?
     el = queue[oldest]
     queue[oldest] = nil
     tracker[oldest] = nil
