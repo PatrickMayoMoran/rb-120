@@ -73,7 +73,7 @@ class CircularQueue
   end
   
   def times
-    times = tracker.select {|el| el.class == Time}
+    tracker.select {|el| el.class == Time}
   end
 
   def enqueue(element)
