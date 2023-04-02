@@ -47,9 +47,17 @@ class CircularQueue
     @tracker = Array.new(buffer)
     @queue = Array.new(buffer)
   end
+  
+  def empty?
+    queue.all?(nil)
+  end
+  
+  def open?
+    queue.any?(nil)
+  end
 
   def find_open_spot
-    if queue.any?(nil)
+    if open?
       queue.index(nil)
     else
       oldest
@@ -70,9 +78,7 @@ class CircularQueue
     queue[i] = element
   end
   
-  def empty?
-    queue.all?(nil)
-  end
+  
 
   def dequeue
     return nil if empty?
