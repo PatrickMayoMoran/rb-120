@@ -65,16 +65,20 @@ class CircularQueue
 
   attr_reader :queue, :tracker
 
+  def empty
+    nil
+  end
+
   def empty?
-    queue.all?(nil)
+    queue.all?(empty)
   end
 
   def open_spot?
-    queue.any?(nil)
+    queue.any?(empty)
   end
 
   def open_index
-    queue.index(nil)
+    queue.index(empty)
   end
 
   def find_insert_spot
@@ -94,8 +98,8 @@ class CircularQueue
   end
 
   def clear(i)
-    queue[i] = nil
-    tracker[i] = nil
+    queue[i] = empty
+    tracker[i] = empty
   end
 end
 
