@@ -41,3 +41,14 @@ the things aren't related!
 definitions will make it clearer whether your groupings make sense and make it
 easier to refactor once you realize they belong somewhere else.
 
+- "An object that could collaborate with others without knowing who they are
+  or what they do could be reused in novel and unanticipated ways"
+  - specific named methods/messages from one object to another create context
+    dependence
+  - i.e. Player expects Moves/Game to respond to display_options to then
+    choose_move... this wrapped context follows objects where they go
+  - What if objects just cared about the 'what' (Play the game) and not the
+    'how' (How other objects are handling their responsibility of the game)
+  - Then they could all respond to play - the public interface - however they
+    want (i.e. with whatever private methods) and the implementation of the
+    game is now pushed into each class
