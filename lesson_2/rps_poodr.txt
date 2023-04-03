@@ -1,0 +1,43 @@
+Object Oriented Design Principles
+- Classes should have single responsibility (What are you responsible for?)
+- Methods should do one thing (What do you do?)
+- Classes should be independent (Who do you rely on?)
+- Objects should know as little as possible about others (Who do you know?)
+
+Tactics:
+- Ask your classes what they are responsible for: If they say 'and' they're 
+responsible for more than one thing. If 'or', then more than one thing AND 
+the things aren't related!
+
+  - Mr. Game, What are you responsible for?
+    - I'm responsible for the player choosing the version they want to play
+    AND managing each round of play between players AND keeping track of 
+    the score
+      - Should probably only be one of the above!
+
+  - Mr. Game Factory, what are you responsible for?
+    - I'm responsible for the user choosing what version they'd like to play
+      and to what score AND creating that game
+        - Should maybe be separated into the choosing game play and the
+        game creation
+
+- Ask your objects if they do the name of your methods
+  - Mr. Player, do you choose a move? (Yes!)
+  - Mr. Player, do you have moves to choose from? (Uh, kind of?)
+  - Mr. Player, do you have a score? (...No?)
+    - Player should probably not have to track score or display moves to
+      choose
+
+  - Mr. Game, do you display the versions of yourself? (Umm... what?)
+  - Mr. Game, do you track score? (absolutely!)
+  - Mr. Game, do you create players? (Uhhh... the players come to me)
+    - Game seems to be combining actions of score tracking, displaying
+      versions, creating its players, etc.
+
+  Interrogating objects helps us hear in plain English whether our grouping of
+  classes and methods make sense or not
+
+- Rewrite methods to each do a single thing - the new method names and
+definitions will make it clearer whether your groupings make sense and make it
+easier to refactor once you realize they belong somewhere else.
+
