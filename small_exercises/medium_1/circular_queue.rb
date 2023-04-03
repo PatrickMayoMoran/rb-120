@@ -63,11 +63,11 @@ class CircularQueue
     if open_spot?
       open_index
     else
-      oldest
+      oldest_index
     end
   end
 
-  def oldest
+  def oldest_index
     tracker.index(times.min)
   end
   
@@ -81,12 +81,17 @@ class CircularQueue
     queue[i] = element
   end
 
+  def update(i)
+    queue[i] = nil
+    tracker[i] = nil
+  end
+
   def dequeue
     return nil if empty?
-    el = queue[oldest]
-    queue[oldest] = nil
-    tracker[oldest] = nil
-    el
+    i = oldest_index
+    deq = queue[i]
+    update(i)
+    deq
   end
 
   private
