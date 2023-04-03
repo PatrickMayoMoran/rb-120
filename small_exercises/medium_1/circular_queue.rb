@@ -81,7 +81,7 @@ class CircularQueue
     queue[i] = element
   end
 
-  def update(i)
+  def clear(i)
     queue[i] = nil
     tracker[i] = nil
   end
@@ -90,7 +90,7 @@ class CircularQueue
     return nil if empty?
     i = oldest_index
     deq = queue[i]
-    update(i)
+    clear(i)
     deq
   end
 
