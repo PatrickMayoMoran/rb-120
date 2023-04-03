@@ -66,13 +66,13 @@ class CircularQueue
       oldest_index
     end
   end
-
-  def oldest_index
-    tracker.index(times.min)
-  end
   
   def times
     tracker.select {|el| el.class == Time}
+  end
+
+  def oldest_index
+    tracker.index(times.min)
   end
 
   def enqueue(element)
