@@ -46,7 +46,25 @@ class CircularQueue
     @tracker = Array.new(size)
     @queue = Array.new(size)
   end
-  
+
+  def enqueue(element)
+    i = find_insert_spot
+    tracker[i] = Time.now
+    queue[i] = element
+  end
+
+  def dequeue
+    return nil if empty?
+    i = oldest_index
+    deq = queue[i]
+    clear(i)
+    deq
+  end
+
+  private
+
+  attr_reader :queue, :tracker
+
   def empty?
     queue.all?(nil)
   end
@@ -75,28 +93,10 @@ class CircularQueue
     tracker.index(times.min)
   end
 
-  def enqueue(element)
-    i = find_insert_spot
-    tracker[i] = Time.now
-    queue[i] = element
-  end
-
   def clear(i)
     queue[i] = nil
     tracker[i] = nil
   end
-
-  def dequeue
-    return nil if empty?
-    i = oldest_index
-    deq = queue[i]
-    clear(i)
-    deq
-  end
-
-  private
-
-  attr_reader :queue, :tracker
 end
 
 queue = CircularQueue.new(3)
