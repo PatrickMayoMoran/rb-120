@@ -42,10 +42,9 @@
 #     find index of oldest time in tracker
 #
 class CircularQueue
-  def initialize(buffer)
-    @buffer = buffer
-    @tracker = Array.new(buffer)
-    @queue = Array.new(buffer)
+  def initialize(size)
+    @tracker = Array.new(size)
+    @queue = Array.new(size)
   end
   
   def empty?
@@ -92,7 +91,7 @@ class CircularQueue
 
   private
 
-  attr_reader :buffer, :queue, :tracker
+  attr_reader :queue, :tracker
 end
 
 queue = CircularQueue.new(3)
