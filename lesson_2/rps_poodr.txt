@@ -52,3 +52,23 @@ easier to refactor once you realize they belong somewhere else.
   - Then they could all respond to play - the public interface - however they
     want (i.e. with whatever private methods) and the implementation of the
     game is now pushed into each class
+
+- When trying to use inheritance from objects that need it, start by moving
+  all the behavior of the proposed superclass down to a single subclass and
+  then "promoting" abstract behavior back up to the superclass
+  - Why the middle man? Because getting rid of all the behavior from the
+    superclass will make it obvious (via errors) what the other subclasses
+    need. This needed behavior can then be promoted to the superclass because
+    it is a reliable abstraction of what the objects are.
+  - This makes it likely that we will correctly abstract to the superclass and
+    leave specifics in subclasses
+  - Whereas, if we try to - in a single step! - demote specific behavior down,
+    we may unintentionally leave concrete, specifc behavior in the superclass
+    and this will be harder to find. 
+    - I.e. we missed demoting something and are
+    now saying it's a characteristic of all things, when really it's only a
+    characteristic of one thing
+  - For **RPS**, this is applicable to our game classes: What are the
+    abstractions between Classic, RoShamBo, and RPSSL? 
+    - Let's start by moving everything to Classic and then promoting to RPS as
+      needed to get RoShamBo and RPSSL to work
