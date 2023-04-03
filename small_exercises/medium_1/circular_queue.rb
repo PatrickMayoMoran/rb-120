@@ -68,11 +68,11 @@ class CircularQueue
   def empty?
     queue.all?(nil)
   end
-  
+
   def open_spot?
     queue.any?(nil)
   end
-  
+
   def open_index
     queue.index(nil)
   end
@@ -84,9 +84,9 @@ class CircularQueue
       oldest_index
     end
   end
-  
+
   def times
-    tracker.select {|el| el.class == Time}
+    tracker.select { |el| el.class == Time }
   end
 
   def oldest_index
