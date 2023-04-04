@@ -14,7 +14,7 @@ end
 class OLine < Player
 end
 
-class DLine < Player
+class DLine < OLine
   protected
   
   def yell
@@ -25,11 +25,22 @@ end
 class Reserve < DLine
 end
 
+class WaterBoy < DLine
+  protected
+
+  def yell
+    puts "Go!"
+  end
+end
+
 player = Player.new
 o = OLine.new
 d = DLine.new
 reserve = Reserve.new
+water = WaterBoy.new
 
+player.cheer(water)
+o.cheer(player)
 player.cheer(o)
 # player.cheer(d)
 # player.cheer(reserve)
@@ -38,5 +49,6 @@ player.cheer(o)
 reserve.cheer(d)
 reserve.cheer(o)
 reserve.cheer(player)
+reserve.cheer(reserve)
 # Interesting! They all work because the original call comes from bottom 
 # of the inheritance hierarchy
