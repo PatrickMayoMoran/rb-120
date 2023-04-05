@@ -1,6 +1,13 @@
 PAJAMAS = "Catch a tiger by its toe"
 
 class GreatGrandparent
+  def ready_for_bed
+    PAJAMAS
+  end
+
+  def ready_now
+    PAJAMAS
+  end
 end
 
 class Grandparent < GreatGrandparent
@@ -8,6 +15,9 @@ class Grandparent < GreatGrandparent
 end
 
 class Parent < Grandparent
+  def ready_for_bed
+    PAJAMAS
+  end
 end
 
 class Child < Parent
@@ -21,3 +31,9 @@ class Grandchild < Child
 end
 
 puts Grandchild.new.ready_for_bed
+puts Parent.new.ready_for_bed
+puts GreatGrandparent.new.ready_for_bed
+
+puts Grandchild.new.ready_now
+puts Parent.new.ready_now
+puts GreatGrandparent.new.ready_now
