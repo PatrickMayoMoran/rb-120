@@ -13,6 +13,10 @@ class Board
     squares[choice] = marker
   end
 
+  def full?
+    squares.none? {|k,s| s.empty?}
+  end
+
   def display
     puts "     |     |"
     puts "  #{squares[1]}  |  #{squares[2]}  |  #{squares[3]}  "
@@ -90,11 +94,11 @@ class TTTGame
 
     loop do
       human_turn
-    #  break if someone_won? || board_full?
+      break if board.full?
 
       computer_turn
       board.display
-    #  break if someone_won? || board_full?
+      break if board.full?
     end
     #display_result
     display_goodbye_message
