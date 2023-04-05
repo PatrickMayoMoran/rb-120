@@ -115,7 +115,7 @@ class TTTGame
   end
 
   def computer_turn
-    board.set_square_at((1..9).to_a.sample, computer.marker)
+    board.set_square_at(empty_squares.sample, computer.marker)
   end
 end
 
