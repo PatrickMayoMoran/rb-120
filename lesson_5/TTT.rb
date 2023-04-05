@@ -98,8 +98,12 @@ class TTTGame
     display_goodbye_message
   end
 
+  def empty_squares
+    board.empty_squares
+  end
+
   def human_turn
-    puts "Please choose a square 1-9"
+    puts "Please choose a square #{empty_squares}"
     choice = nil
     loop do
       choice = gets.chomp.to_i
