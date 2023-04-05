@@ -16,7 +16,13 @@ class Fruit
   attr_reader :name
 end
 
-class Apple < Fruit; end
+class Apple < Fruit
+  protected
+  def type
+    name
+  end
+end
+
 class Orange < Fruit; end
 class Pear < Fruit; end
 
@@ -24,6 +30,6 @@ apple = Apple.new("Macintosh")
 orange = Orange.new("Navel")
 pear = Pear.new("Bradford")
 
-apple.compare(orange)
-orange.compare(pear)
+apple.compare(orange) # I am Macintosh and you are Navel
+orange.compare(pear) # I am Navel and you are Bradford
 pear.compare(apple)
