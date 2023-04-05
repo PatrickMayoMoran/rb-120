@@ -18,6 +18,7 @@ class Board
   end
 
   def display
+    system 'clear'
     puts "     |     |"
     puts "  #{squares[1]}  |  #{squares[2]}  |  #{squares[3]}  "
     puts "     |     |"
