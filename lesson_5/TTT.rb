@@ -3,14 +3,27 @@ class Board
 
   def initialize
     @squares = initialize_squares
-    puts squares
+  end
+
+  def display
+    puts "     |     |"
+    puts "  #{squares[1]}  |  #{squares[2]}  |  #{squares[3]}  "
+    puts "     |     |"
+    puts "-----+-----+-----"
+    puts "     |     |"
+    puts "  #{squares[4]}  |  #{squares[5]}  |  #{squares[6]}  "
+    puts "     |     |"
+    puts "-----+-----+-----"
+    puts "     |     |"
+    puts "  #{squares[7]}  |  #{squares[8]}  |  #{squares[9]}  "
+    puts "     |     |"
   end
 
   def initialize_squares
-    (1..9).each_with_object({}) {|n,h| h[n] = square}
+    (1..9).each_with_object({}) {|n,h| h[n] = new_square}
   end
 
-  def square
+  def new_square
     Square.new
   end
 end
@@ -22,7 +35,7 @@ class Square
   end
 
   def default
-    ''
+    ' '
   end
 
   def to_s
@@ -54,19 +67,6 @@ class TTTGame
     puts "Thanks for playing Tic Tac Toe. Goodbye!"
   end
 
-  def display_board
-    puts "     |     |"
-    puts "     |     |"
-    puts "     |     |"
-    puts "-----+-----+-----"
-    puts "     |     |"
-    puts "     |     |"
-    puts "     |     |"
-    puts "-----+-----+-----"
-    puts "     |     |"
-    puts "     |     |"
-    puts "     |     |"
-  end
 
   def play
     display_welcome_message
@@ -86,3 +86,4 @@ end
 #game = TTTGame.new
 #game.play
 board = Board.new
+board.display
