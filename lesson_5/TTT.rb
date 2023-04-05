@@ -5,6 +5,10 @@ class Board
     @squares = initialize_squares
   end
 
+  def empty_squares
+    squares.keys.select {|k| squares[k].empty?}
+  end
+
   def set_square_at(choice, marker)
     squares[choice] = marker
   end
@@ -42,6 +46,10 @@ class Square
     ' '
   end
 
+  def empty?
+    mark == default
+  end
+
   def to_s
     mark
   end
@@ -76,15 +84,14 @@ class TTTGame
 
   def play
     display_welcome_message
+    board.display
+
     loop do
-      board.display
       human_turn
-      board.display
     #  break if someone_won? || board_full?
 
       computer_turn
       board.display
-      break
     #  break if someone_won? || board_full?
     end
     #display_result
