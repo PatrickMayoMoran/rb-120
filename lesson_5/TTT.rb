@@ -1,5 +1,13 @@
 class Board
+  attr_reader :squares
+
   def initialize
+    @squares = initialize_squares
+    p squares
+  end
+
+  def initialize_squares
+    (1..9).each_with_object({}) {|n,h| h[n] = ''}
   end
 end
 
@@ -17,6 +25,11 @@ class Player
 end
 
 class TTTGame
+  attr_reader :board
+
+  def initialize
+    @board = Board.new
+  end
 
   def display_welcome_message
     puts "Welcome to Tic Tac Toe!"
@@ -56,5 +69,6 @@ class TTTGame
   end
 end
 
-game = TTTGame.new
-game.play
+#game = TTTGame.new
+#game.play
+board = Board.new
