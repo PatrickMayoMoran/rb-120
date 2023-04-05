@@ -64,12 +64,14 @@ class Player
 end
 
 class TTTGame
+  HUMAN = 'X'
+  COMPUTER = 'O'
   attr_reader :board, :human, :computer
 
   def initialize
     @board = Board.new
-    @human = Player.new('X')
-    @computer = Player.new('O')
+    @human = Player.new(HUMAN)
+    @computer = Player.new(COMPUTER)
   end
 
   def display_welcome_message
