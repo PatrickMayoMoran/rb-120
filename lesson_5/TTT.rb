@@ -52,10 +52,12 @@ class Player
 end
 
 class TTTGame
-  attr_reader :board
+  attr_reader :board, :human, :computer
 
   def initialize
     @board = Board.new
+    @human = Player.new
+    @computer = Player.new
   end
 
   def display_welcome_message
@@ -71,11 +73,12 @@ class TTTGame
   def play
     display_welcome_message
     loop do
-      display_board
-      first_player_moves
+      board.display
+      human_moves
+      board.display
       break if someone_won? || board_full?
 
-      second_player_moves
+      computer_moves
       break if someone_won? || board_full?
     end
     display_result
@@ -83,7 +86,5 @@ class TTTGame
   end
 end
 
-#game = TTTGame.new
-#game.play
-board = Board.new
-board.display
+game = TTTGame.new
+game.play
