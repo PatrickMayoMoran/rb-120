@@ -18,7 +18,11 @@ end
 class Square
   attr_reader :mark
   def initialize
-    @mark = ''
+    @mark = default
+  end
+
+  def default
+    ''
   end
 
   def to_s
