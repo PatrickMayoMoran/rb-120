@@ -5,6 +5,10 @@ class Board
     @squares = initialize_squares
   end
 
+  def set_square_at(choice, marker)
+    squares[choice] = marker
+  end
+
   def display
     puts "     |     |"
     puts "  #{squares[1]}  |  #{squares[2]}  |  #{squares[3]}  "
@@ -44,10 +48,10 @@ class Square
 end
 
 class Player
-  def initialize
-  end
+  attr_reader :marker
 
-  def mark
+  def initialize(marker)
+    @marker = marker
   end
 end
 
@@ -56,8 +60,8 @@ class TTTGame
 
   def initialize
     @board = Board.new
-    @human = Player.new
-    @computer = Player.new
+    @human = Player.new('X')
+    @computer = Player.new('O')
   end
 
   def display_welcome_message
@@ -74,15 +78,27 @@ class TTTGame
     display_welcome_message
     loop do
       board.display
-      human_moves
+      human_turn
       board.display
       break if someone_won? || board_full?
 
-      computer_moves
+      computer_turn
       break if someone_won? || board_full?
     end
     display_result
     display_goodbye_message
+  end
+
+  def human_turn
+    puts "Please choose a square 1-9"
+    choice = nil
+    loop do
+      choice = gets.chomp.to_i
+      break if (1..9).include?(choice)
+      puts "Sorry, not a valid choice - please enter a square 1-9"
+    end
+
+    board.set_square_at(choice, human.marker)
   end
 end
 
