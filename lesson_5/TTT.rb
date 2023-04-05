@@ -3,16 +3,26 @@ class Board
 
   def initialize
     @squares = initialize_squares
-    p squares
+    puts squares
   end
 
   def initialize_squares
-    (1..9).each_with_object({}) {|n,h| h[n] = ''}
+    (1..9).each_with_object({}) {|n,h| h[n] = square}
+  end
+
+  def square
+    Square.new
   end
 end
 
 class Square
+  attr_reader :mark
   def initialize
+    @mark = ''
+  end
+
+  def to_s
+    mark
   end
 end
 
