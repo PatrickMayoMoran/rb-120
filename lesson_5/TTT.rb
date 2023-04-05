@@ -107,8 +107,8 @@ class TTTGame
     choice = nil
     loop do
       choice = gets.chomp.to_i
-      break if (1..9).include?(choice)
-      puts "Sorry, not a valid choice - please enter a square 1-9"
+      break if empty_squares.include?(choice)
+      puts "Sorry, not a valid choice - please enter a square #{empty_squares}"
     end
 
     board.set_square_at(choice, human.marker)
