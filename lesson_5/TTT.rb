@@ -80,12 +80,14 @@ class TTTGame
       board.display
       human_turn
       board.display
-      break if someone_won? || board_full?
+    #  break if someone_won? || board_full?
 
       computer_turn
-      break if someone_won? || board_full?
+      board.display
+      break
+    #  break if someone_won? || board_full?
     end
-    display_result
+    #display_result
     display_goodbye_message
   end
 
@@ -99,6 +101,10 @@ class TTTGame
     end
 
     board.set_square_at(choice, human.marker)
+  end
+
+  def computer_turn
+    board.set_square_at((1..9).to_a.sample, computer.marker)
   end
 end
 
