@@ -1,8 +1,22 @@
 class Board
+  WINNING_LINES = [[1,2,3], [4,5,6], [7,8,9]] +
+                  [[1,4,7], [2,5,8], [3,6,9]] +
+                  [[1,5,9], [3,5,8]]
+
   attr_reader :squares
 
   def initialize
     @squares = initialize_squares
+  end
+
+  def someone_won?
+    !!detect_winner
+  end
+
+  def detect_winner
+    WINNING_LINES.any? do |line|
+      puts squares[*line]
+    end
   end
 
   def empty_squares
@@ -95,7 +109,7 @@ class TTTGame
 
     loop do
       human_turn
-      break if board.full?
+      break if board.full? || board.someone_won?
 
       computer_turn
       board.display
