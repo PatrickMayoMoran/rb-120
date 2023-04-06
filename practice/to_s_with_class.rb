@@ -4,7 +4,7 @@ class FarmAnimal
     end
 
     def to_s
-      # self.class --> original line, returns class object, not string of class
+       # self.class --> original line, returns class object, not string of class
       self.class.to_s # --> this creates desired behavior
     end
   end
