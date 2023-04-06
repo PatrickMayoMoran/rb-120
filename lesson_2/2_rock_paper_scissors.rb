@@ -30,22 +30,9 @@ end
 class Game
   attr_reader :person, :type, :score, :computer, :moves
   def initialize
-<<<<<<< HEAD
-    @moves = [Rock, Paper, Scissors]
     @person = Person.new(moves)
     @computer = Computer.new(moves)
-=======
-<<<<<<< HEAD
-    @type = choose_type.new
     @moves = type.moves
-    @person = Person.new(moves)
-    @computer = Computer.new(moves)
-=======
-    @person = Person.new
-    @computer = Computer.new
->>>>>>> main
-    #@type = choose_type
->>>>>>> development
     @score = choose_score
 
     play until winner?
@@ -209,6 +196,11 @@ end
 class Move
   include Comparable
 
+  def initialize
+    @beats = beats
+    @loses = loses
+  end
+
   def <=>(other)
     1  if self.beats?(other)
     -1 if self.loses?(other)
@@ -227,55 +219,44 @@ class Move
     self.class == other.class
   end
 
+  def beats; raise NotImplementedError; end
+
+  def loses; raise NotImplementedError; end
 end
 
 class Rock < Move
-  def initialize
-    @beats = [Scissors, Lizard, Water]
-    @loses = [Paper, Spock, Fire]
-  end
+  def beats; [Scissors, Lizard, Water]; end
+  def loses; [Paper, Spock, Fire]; end
 end
 
 class Scissors < Move
-  def initialize
-    @beats = [Paper, Lizard, Water]
-    @loses = [Rock, Spock, Fire]
-  end
+  def beats; [Paper, Lizard, Water]; end
+  def loses; [Rock, Spock, Fire]; end
 end
 
 class Paper < Move
-  def initialize
-    @beats = [Rock, Spock, Water]
-    @loses = [Scissors, Lizard, Fire]
-  end
+  def beats; [Rock, Spock, Water]; end
+  def loses; [Scissors, Lizard, Fire]; end
 end
 
 class Spock < Move
-  def initialize
-    @beats = [Rock, Scissors, Water]
-    @loses = [Paper, Lizard, Fire]
-  end
+  def beats; [Rock, Scissors, Water]; end
+  def loses; [Paper, Lizard, Fire]; end
 end
 
 class Lizard < Move
-  def initialize
-    @beats = [Paper, Spock, Water]
-    @loses = [Rock, Scissors, Fire]
-  end
+  def beats; [Paper, Spock, Water]; end
+  def loses; [Rock, Scissors, Fire]; end
 end
 
 class Fire < Move
-  def initialize
-    @beats = [Paper, Spock, Rock, Scissors, Lizard]
-    @loses = [Water]
-  end
+  def beats; [Paper, Spock, Rock, Scissors, Lizard]; end
+  def loses; [Water]; end
 end
 
 class Water < Move
-  def initialize
-    @beats = [Fire]
-    @loses = [Paper, Spock, Rock, Scissors, Lizard]
-  end
+  def beats; [Fire]; end
+  def loses; [Paper, Spock, Rock, Scissors, Lizard]; end
 end
 
 class Player
@@ -284,7 +265,6 @@ class Player
   def initialize(moves)
     @name = get_name
     @moves = moves
-<<<<<<< HEAD
   end
 
   def display_moves
@@ -295,8 +275,6 @@ class Player
     choices = {}
     @moves.each_with_index {|m,i| choices[i+1] = m }
     choices
-=======
->>>>>>> main
   end
 end
 
@@ -345,4 +323,5 @@ class Computer < Player
   end
 end
 
-Engine.new
+#Engine.new
+Rock.new.beats
