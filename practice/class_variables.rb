@@ -13,13 +13,12 @@ class Cat
   end
 end
 
-class Kitty < Cat
+class Kitty < Cat; @@cats = 15; # This changes the variable in Cat!
 end
 
 tiny = Cat.new
 p Cat.cats
 p Kitty.cats
 kitty = Kitty.new
-Kitty.cats = 0
 p Cat.cats
 p Kitty.cats
