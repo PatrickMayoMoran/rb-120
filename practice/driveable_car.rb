@@ -1,4 +1,4 @@
-class Driveable
+module Driveable
   def self.drive
     puts "I'm driving"
   end
@@ -9,4 +9,5 @@ class Car
 end
 
 bobs_car = Car.new
-bobs_car.drive
+#bobs_car.drive
+Driveable::drive
