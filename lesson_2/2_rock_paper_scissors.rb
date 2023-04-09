@@ -11,10 +11,9 @@ class Engine
   def initialize
     greet
     Prompt.continue
-    loop do
-      Game.new
-      break unless play_again?
-    end
+    get_game_settings
+    start_game(settings)
+    #break unless play_again?
     farewell
   end
 
@@ -25,6 +24,14 @@ class Engine
 
   def farewell
     puts "Thanks for playing - Goodbye!"
+  end
+
+  def get_game_settings
+    raise NotImplementedError, "You haven't defined this yet"
+  end
+
+  def start_game
+    raise NotImplementedError, "You haven't defined this yet"
   end
 
 end
