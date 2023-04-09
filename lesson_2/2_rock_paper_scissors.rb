@@ -1,14 +1,16 @@
-def continue
-  puts "========================="
-  puts "Press enter to continue: "
-  gets
-  system 'clear'
+module Prompt
+  def self.continue
+    puts "========================="
+    puts "Press enter to continue: "
+    gets
+    system 'clear'
+  end
 end
 
 class Engine
   def initialize
     greet
-    continue
+    Prompt.continue
     loop do
       Game.new
       break unless play_again?
@@ -37,7 +39,7 @@ class Game
 
     play until winner?
     display_winner
-    continue
+    Prompt.continue
   end
 
   def winner?
@@ -60,7 +62,7 @@ class Game
     end
 
     puts "You chose #{choice}."
-    continue
+    Prompt.continue
     choice
   end
 
@@ -159,7 +161,7 @@ class Type
 
       type = TYPES[choice]
       puts type.rules
-      continue
+      Prompt.continue
     end
     system 'clear'
   end
@@ -186,7 +188,7 @@ class Type
 
     type = TYPES[choice]
     puts "You chose #{type}."
-    continue
+    Prompt.continue
     return type
   end
 
@@ -292,7 +294,7 @@ class Person < Player
       "Not valid - please enter the number of your choice."
     end
     puts "You chose #{moves[choice]}"
-    continue
+    Prompt.continue
   end
 
   def get_name
@@ -307,7 +309,7 @@ class Person < Player
 
     self.name = name
     puts "Nice to meet you #{name}!"
-    continue
+    Prompt.continue
 
   end
 
@@ -323,5 +325,4 @@ class Computer < Player
   end
 end
 
-#Engine.new
-Rock.new.beats
+Engine.new
