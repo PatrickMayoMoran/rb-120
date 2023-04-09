@@ -3,6 +3,10 @@ module Prompt
     puts "========================="
     puts "Press enter to continue: "
     gets
+    clear
+  end
+
+  def self.clear
     system 'clear'
   end
 end
@@ -17,8 +21,28 @@ class Engine
     farewell
   end
 
+  def choose_score
+    puts "What score would you like to play to?"
+    choice = nil
+    loop do
+      puts <<~HEREDOC
+      1) Best of 1
+      3) Best of 3
+      5) Best of 5
+      HEREDOC
+      choice = gets.chomp.to_i
+      break if [1,3,5].include?(choice)
+      Prompt.clear
+      puts "Not a valid choice - please choose 1, 3, or 5."
+    end
+
+    puts "You chose #{choice}."
+    Prompt.continue
+    choice
+  end
+
   def greet
-    system 'clear'
+    Prompt.clear
     puts "Welcome to Rock Paper Scissors!"
   end
 
@@ -53,25 +77,6 @@ class Game
     person.score == score || computer.score == score
   end
 
-  def choose_score
-    puts "What score would you like to play to?"
-    choice = nil
-    loop do
-      puts <<~HEREDOC
-      1) Best of 1
-      3) Best of 3
-      5) Best of 5
-      HEREDOC
-      choice = gets.chomp.to_i
-      break if [1,3,5].include?(choice)
-      system 'clear'
-      puts "Not a valid choice - please choose 1, 3, or 5."
-    end
-
-    puts "You chose #{choice}."
-    Prompt.continue
-    choice
-  end
 
   def choose_type
     Type.explain
@@ -170,7 +175,7 @@ class Type
       puts type.rules
       Prompt.continue
     end
-    system 'clear'
+    Prompt.clear
   end
 
   def self.valid?(choice)
@@ -189,7 +194,7 @@ class Type
       choice = gets.chomp.to_i
       break if valid?(choice)
 
-      system 'clear'
+      Prompt.clear
       puts "Not a valid choice, please choose again."
       end
 
@@ -297,7 +302,7 @@ class Person < Player
     loop do
       choice = gets.chomp.to_i
       break choice if moves.key?(choice)
-      system 'clear'
+      Prompt.clear
       "Not valid - please enter the number of your choice."
     end
     puts "You chose #{moves[choice]}"
@@ -310,7 +315,7 @@ class Person < Player
     loop do
       name = gets.chomp
       break if valid?(name)
-      system 'clear'
+      Prompt.clear
       puts "Please enter a valid name."
     end
 
