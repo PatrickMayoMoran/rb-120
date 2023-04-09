@@ -12,7 +12,7 @@ class Engine
     greet
     Prompt.continue
     get_game_settings
-    start_game(settings)
+    make_game(settings)
     #break unless play_again?
     farewell
   end
@@ -30,7 +30,7 @@ class Engine
     raise NotImplementedError, "You haven't defined this yet"
   end
 
-  def start_game
+  def make_game
     raise NotImplementedError, "You haven't defined this yet"
   end
 
