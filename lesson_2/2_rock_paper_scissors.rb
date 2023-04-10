@@ -11,11 +11,22 @@ module Prompt
   end
 end
 
+class GameSettings
+  def score
+  end
+
+  def type
+  end
+
+  def moves
+  end
+end
+
 class Engine
   def initialize
     greet
     Prompt.continue
-    get_game_settings
+    self.settings = get_game_settings
     make_game(settings)
     #break unless play_again?
     farewell
@@ -50,8 +61,12 @@ class Engine
     puts "Thanks for playing - Goodbye!"
   end
 
+  private
+  attr_accessor :settings
+
   def get_game_settings
-    raise NotImplementedError, "You haven't defined this yet"
+    settings = GameSettings.new
+    #raise NotImplementedError, "You haven't defined this yet"
   end
 
   def make_game
