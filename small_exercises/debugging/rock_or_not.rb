@@ -1,3 +1,4 @@
+#### MY SOLUTION
 class AuthenticationError < StandardError; end
 
 # A mock search engine
@@ -28,11 +29,9 @@ module DoesItRock
     def self.for_term(term)
       positive = SearchEngine.count(%{"#{term} rocks"}, API_KEY).to_f
       negative = SearchEngine.count(%{"#{term} is not fun"}, API_KEY).to_f
-      p positive
-      p negative
 
-      p (positive * 100) / (positive + negative)
-      (positive * 100) / (positive + negative)
+      # Remove multiplication by 100
+      positive / (positive + negative)
     rescue ZeroDivisionError => e
       NoScore.new
     end
