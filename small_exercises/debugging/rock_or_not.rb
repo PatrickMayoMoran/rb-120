@@ -27,10 +27,12 @@ module DoesItRock
 
   class Score
     def self.for_term(term)
-      positive = SearchEngine.count(%{"#{term} rocks"}, API_KEY).to_f
-      negative = SearchEngine.count(%{"#{term} is not fun"}, API_KEY).to_f
+      positive = SearchEngine.count(%{"#{term} rocks"}, API_KEY)
+      negative = SearchEngine.count(%{"#{term} is not fun"}, API_KEY)
 
       # Remove multiplication by 100
+      # Still issue of number being wayyyy bigger than one when negative is
+      # bigger OR number being smaller when positive is bigger
       positive / (positive + negative)
     rescue ZeroDivisionError => e
       NoScore.new
