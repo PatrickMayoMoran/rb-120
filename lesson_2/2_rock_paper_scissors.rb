@@ -122,7 +122,7 @@ end
 class Classic
   attr_reader :moves
   def initialize
-    @moves = [:rock, :paper, :scissors]
+    @moves = [Rock, Paper, Scissors]
   end
 
   def self.rules
@@ -139,7 +139,7 @@ class RoShamBo
   attr_reader :moves
 
   def initialize
-    @moves = [:rock, :paper, :scissors, :fire, :water]
+    @moves = [Rock, Paper, Scissors, Fire, Water]
   end
 
   def self.rules
@@ -160,7 +160,7 @@ class RPSSL
   attr_reader :moves
 
   def initialize
-    @moves = [:rock, :paper, :scissors, :spock, :lizard]
+    @moves = [Rock, Paper, Scissors, Spock, Lizard]
   end
 
   def self.rules
