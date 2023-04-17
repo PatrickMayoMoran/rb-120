@@ -118,9 +118,9 @@ class RoShamBo
 end
 
 class RPSSL
-    def self.moves
-      [Rock, Paper, Scissors, Spock, Lizard]
-    end
+  def self.moves
+    [Rock, Paper, Scissors, Spock, Lizard]
+  end
 
   def self.rules
     <<~HEREDOC
@@ -180,7 +180,7 @@ class TypeChooser
     types.each { |k, t| puts "#{k}: #{t.name}" }
   end
 
-  def choose
+  def validate_choice
     choice = nil
     loop do
       puts "Please enter 1, 2, or 3 to choose your game type:"
@@ -190,7 +190,11 @@ class TypeChooser
       Prompt.clear
       puts "Not a valid choice, please choose again."
     end
+    choice
+  end
 
+  def choose
+    choice = validate_choice
     type = types[choice]
     puts "You chose #{type}."
     Prompt.continue
@@ -221,9 +225,7 @@ class GameSettings
     HEREDOC
   end
 
-  def choose_score
-    puts "What score would you like to play to?"
-    puts choose_score_heredoc
+  def validate_score
     choice = nil
     loop do
       choice = gets.chomp.to_i
@@ -231,7 +233,13 @@ class GameSettings
       Prompt.clear
       puts "Not a valid choice - please choose 1, 3, or 5."
     end
+    choice
+  end
 
+  def choose_score
+    puts "What score would you like to play to?"
+    puts choose_score_heredoc
+    choice = validate_score
     puts "You chose #{choice}."
     Prompt.continue
     choice
@@ -243,8 +251,7 @@ class GameSettings
 end
 
 class GameFactory
-  def initialize(settings)
-  end
+  def initialize(settings); end
 end
 
 class Engine
@@ -312,7 +319,7 @@ class Player
   attr_accessor :score
 
   def initialize(moves)
-    @name = get_name
+    @name = choose_name
     @moves = moves
   end
 
@@ -330,22 +337,26 @@ end
 class Person < Player
   attr_accessor :name
 
-  def move
-    puts "Please choose a move"
-    display_moves
-    choice = nil
+  def validate_move
+    move = nil
     loop do
-      choice = gets.chomp.to_i
-      break choice if moves.key?(choice)
+      move = gets.chomp.to_i
+      break move if moves.key?(move)
       Prompt.clear
       "Not valid - please enter the number of your choice."
     end
-    puts "You chose #{moves[choice]}"
+    move
+  end
+
+  def move
+    puts "Please choose a move"
+    display_moves
+    move = validate_move
+    puts "You chose #{moves[move]}"
     Prompt.continue
   end
 
-  def get_name
-    puts "What's your name?"
+  def validate_name
     name = nil
     loop do
       name = gets.chomp
@@ -353,7 +364,12 @@ class Person < Player
       Prompt.clear
       puts "Please enter a valid name."
     end
+    name
+  end
 
+  def choose_name
+    puts "What's your name?"
+    name = validate_name
     self.name = name
     puts "Nice to meet you #{name}!"
     Prompt.continue
@@ -365,7 +381,7 @@ class Person < Player
 end
 
 class Computer < Player
-  def get_name
+  def choose_name
     @name = ['Mufasa', 'Scar', 'TinyCat'].sample
   end
 end
