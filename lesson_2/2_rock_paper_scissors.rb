@@ -217,7 +217,7 @@ class GameSettings
   private
 
   def score_options
-    [1, 3, 5]
+    [1, 3, 5, 7, 9]
   end
 
   def display_score_options
@@ -232,7 +232,8 @@ class GameSettings
       choice = gets.chomp.to_i
       break if score_options.include?(choice)
       Prompt.clear
-      puts "Not a valid choice - please choose #{score_options}."
+      puts "Not a valid choice - please choose:"
+      display_score_options
     end
     choice
   end
