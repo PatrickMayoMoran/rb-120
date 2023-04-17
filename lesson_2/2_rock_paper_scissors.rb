@@ -276,7 +276,7 @@ class TypeChooser
     choice = nil
     loop do
       puts "There are three types of game to choose from: "
-      self.display
+      display
       puts "Enter 1, 2, or 3 to read the rules for that type. Enter anything else to continue."
       choice = gets.chomp.to_i
       break unless valid?(choice)
@@ -288,19 +288,19 @@ class TypeChooser
     Prompt.clear
   end
 
-  def self.valid?(choice)
+  def valid?(choice)
     TYPES.key?(choice)
   end
 
-  def self.display
+  def display
     TYPES.each {|k,t| puts "#{k}: #{t.name}" }
   end
 
-  def self.choose
+  def choose
     choice = nil
     loop do
       puts "Please enter 1, 2, or 3 to choose your game type:"
-      self.display
+      display
       choice = gets.chomp.to_i
       break if valid?(choice)
 
