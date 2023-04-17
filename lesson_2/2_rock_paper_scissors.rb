@@ -12,26 +12,14 @@ module Prompt
 end
 
 class GameSettings
-  def score
-  end
-
-  def type
-  end
-
-  def moves
-  end
-end
-
-class Engine
+  attr_reader :score, :type, :moves
   def initialize
-    greet
-    Prompt.continue
-    self.settings = get_game_settings
-    make_game(settings)
-    #break unless play_again?
-    farewell
+    @score = choose_score
+    @type = choose_type
+    @moves = type.moves
   end
 
+  private
   def choose_score
     puts "What score would you like to play to?"
     choice = nil
@@ -51,6 +39,20 @@ class Engine
     Prompt.continue
     choice
   end
+end
+
+class Engine
+  def initialize
+    greet
+    Prompt.continue
+    loop do
+      self.settings = get_game_settings
+      start_game(settings)
+      break #unless play_again?
+    end
+    farewell
+  end
+
 
   def greet
     Prompt.clear
@@ -66,10 +68,9 @@ class Engine
 
   def get_game_settings
     settings = GameSettings.new
-    #raise NotImplementedError, "You haven't defined this yet"
   end
 
-  def make_game
+  def start_game
     raise NotImplementedError, "You haven't defined this yet"
   end
 
