@@ -13,6 +13,7 @@ end
 
 class GameSettings
   attr_reader :score, :type, :moves
+
   def initialize
     @score = choose_score
     @type = choose_type
@@ -20,10 +21,11 @@ class GameSettings
   end
 
   def config
-    {score: score, type: type, moves: moves}
+    { score: score, type: type, moves: moves }
   end
 
   private
+
   def choose_score
     puts "What score would you like to play to?"
     choice = nil
@@ -34,7 +36,7 @@ class GameSettings
       5) Best of 5
       HEREDOC
       choice = gets.chomp.to_i
-      break if [1,3,5].include?(choice)
+      break if [1, 3, 5].include?(choice)
       Prompt.clear
       puts "Not a valid choice - please choose 1, 3, or 5."
     end
@@ -45,10 +47,8 @@ class GameSettings
   end
 
   def choose_type
-    TypeChooser.new
+    TypeChooser.new.type
   end
-
-
 end
 
 class Engine
@@ -58,11 +58,10 @@ class Engine
     loop do
       self.settings = get_game_settings
       start_game(settings)
-      break #unless play_again?
+      break # unless play_again?
     end
     farewell
   end
-
 
   def greet
     Prompt.clear
@@ -74,6 +73,7 @@ class Engine
   end
 
   private
+
   attr_accessor :settings
 
   def get_game_settings
@@ -83,11 +83,11 @@ class Engine
   def start_game
     raise NotImplementedError, "You haven't defined this yet"
   end
-
 end
 
 class Game
   attr_reader :person, :type, :score, :computer, :moves
+
   def initialize
     @person = Person.new(moves)
     @computer = Computer.new(moves)
@@ -103,7 +103,6 @@ class Game
     person.score == score || computer.score == score
   end
 
-
   def choose_type
     Type.explain
     Type.choose
@@ -115,23 +114,22 @@ class Game
     person.score += 1 if p > c
     computer.score += 1 if c > p
   end
-
 end
-
 
 class Classic
   attr_reader :moves
+
   def initialize
     @moves = [Rock, Paper, Scissors]
   end
 
   def self.rules
-  <<~HEREDOC
-  Classic Rock, Paper, Scissors works as follows:
-    Rock beats Scissors
-    Scissors beats Paper
-    Paper beats Rock
-  HEREDOC
+    <<~HEREDOC
+    Classic Rock, Paper, Scissors works as follows:
+      Rock beats Scissors
+      Scissors beats Paper
+      Paper beats Rock
+    HEREDOC
   end
 end
 
@@ -143,16 +141,16 @@ class RoShamBo
   end
 
   def self.rules
-  <<~HEREDOC
-  RoShamBo works as follows:
-    Rock beats Scissors
-    Scissors beats Paper
-    Paper beats Rock
-    Fire beats everything but Water
-    Water loses to everything but Fire
-    You can choose Water as many times as you want
-    You can only use Fire once
-  HEREDOC
+    <<~HEREDOC
+    RoShamBo works as follows:
+      Rock beats Scissors
+      Scissors beats Paper
+      Paper beats Rock
+      Fire beats everything but Water
+      Water loses to everything but Fire
+      You can choose Water as many times as you want
+      You can only use Fire once
+    HEREDOC
   end
 end
 
@@ -175,9 +173,6 @@ class RPSSL
   end
 end
 
-
-
-
 class Move
   include Comparable
 
@@ -187,9 +182,9 @@ class Move
   end
 
   def <=>(other)
-    1  if self.beats?(other)
-    -1 if self.loses?(other)
-    0  if self.ties?(other)
+    1  if beats?(other)
+    -1 if loses?(other)
+    0  if ties?(other)
   end
 
   def beats?(other)
@@ -248,12 +243,13 @@ class TypeChooser
   attr_reader :type
 
   def initialize
-    @types = {1 => Classic, 2 => RoShamBo, 3 => RPSSL}
+    @types = { 1 => Classic, 2 => RoShamBo, 3 => RPSSL }
     explain
     @type = choose
   end
 
   private
+
   attr_reader :types
 
   def explain
@@ -261,7 +257,8 @@ class TypeChooser
     loop do
       puts "There are three types of game to choose from: "
       display
-      puts "Enter 1, 2, or 3 to read the rules for that type. Enter anything else to continue."
+      puts "Enter 1, 2, or 3 to read the rules for that type."
+      puts "Enter anything else to continue."
       choice = gets.chomp.to_i
       Prompt.clear
       break unless valid?(choice)
@@ -277,7 +274,7 @@ class TypeChooser
   end
 
   def display
-    types.each {|k,t| puts "#{k}: #{t.name}" }
+    types.each { |k, t| puts "#{k}: #{t.name}" }
   end
 
   def choose
@@ -308,12 +305,12 @@ class Player
   end
 
   def display_moves
-    moves.each {|k,m| puts "#{k}: #{move}" }
+    moves.each { |k, m| puts "#{k}: #{m}" }
   end
 
   def moves
     choices = {}
-    @moves.each_with_index {|m,i| choices[i+1] = m }
+    @moves.each_with_index { |m, i| choices[i + 1] = m }
     choices
   end
 end
@@ -348,7 +345,6 @@ class Person < Player
     self.name = name
     puts "Nice to meet you #{name}!"
     Prompt.continue
-
   end
 
   def valid?(name)
@@ -357,7 +353,6 @@ class Person < Player
 end
 
 class Computer < Player
-
   def get_name
     @name = ['Mufasa', 'Scar', 'TinyCat'].sample
   end
