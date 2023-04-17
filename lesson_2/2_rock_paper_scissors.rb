@@ -128,9 +128,6 @@ class Classic
   def self.rules
   <<~HEREDOC
   Classic Rock, Paper, Scissors works as follows:
-    1) You and your opponent choose a move: Rock, Paper, or Scissors
-    2) Moves are compared to see who wins!
-  Here are the rules:
     Rock beats Scissors
     Scissors beats Paper
     Paper beats Rock
@@ -148,9 +145,6 @@ class RoShamBo
   def self.rules
   <<~HEREDOC
   RoShamBo works as follows:
-    1) You and your opponent choose a move: Rock, Paper, Scissors, Water, or Fire.
-    2) Moves are compared to see who wins!
-  Here are the rules:
     Rock beats Scissors
     Scissors beats Paper
     Paper beats Rock
@@ -172,9 +166,6 @@ class RPSSL
   def self.rules
     <<~HEREDOC
     Rock, Paper, Scissors, Spock, Lizard works as follows:
-      1) You and your opponent choose a move: Rock, Paper, Scissors, Spock, or Lizard
-      2) Moves are compared to see who wins!
-    Here are the rules:
       Rock beats Scissors and Lizard
       Scissors beats Paper and Lizard
       Paper beats Rock and Spock
