@@ -265,7 +265,7 @@ class RPSSL
 end
 
 class TypeChooser
-
+  TYPES = {1 => Classic, 2 => RoShamBo, 3 => RPSSL}
   attr_reader :moves
   def initialize
     explain
