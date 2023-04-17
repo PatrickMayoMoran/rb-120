@@ -178,16 +178,6 @@ class RPSSL
   end
 end
 
-class Classic
-  MOVES = [Rock, Paper, Scissors]
-end
-
-class RoShamBo
-  MOVES = Classic::MOVES + [Water, Fire]
-end
-class RPSSL
-  MOVES = Classic::MOVES + [Spock, Lizard]
-end
 
 class Type
 
@@ -304,6 +294,16 @@ class Water < Move
   def loses; [Paper, Spock, Rock, Scissors, Lizard]; end
 end
 
+class Classic
+  MOVES = [Rock, Paper, Scissors]
+end
+
+class RoShamBo
+  MOVES = Classic::MOVES + [Water, Fire]
+end
+class RPSSL
+  MOVES = Classic::MOVES + [Spock, Lizard]
+end
 class Player
   attr_accessor :score
 
