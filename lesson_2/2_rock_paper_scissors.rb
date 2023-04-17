@@ -56,7 +56,7 @@ class Engine
     greet
     Prompt.continue
     loop do
-      self.settings = get_game_settings
+      self.settings = choose_settings
       start_game(settings)
       break # unless play_again?
     end
@@ -76,8 +76,8 @@ class Engine
 
   attr_accessor :settings
 
-  def get_game_settings
-    settings = GameSettings.new.config
+  def choose_settings
+    GameSettings.new.config
   end
 
   def start_game
