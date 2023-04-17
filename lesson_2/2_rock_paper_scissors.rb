@@ -80,13 +80,13 @@ class Engine
     GameSettings.new.config
   end
 
-  def start_game
-    raise NotImplementedError, "You haven't defined this yet"
+  def start_game(settings)
+    GameFactory.new(settings)
   end
 end
 
 class Game
-  attr_reader :person, :type, :score, :computer, :moves
+  attr_reader :person, :score, :computer, :moves
 
   def initialize
     @person = Person.new(moves)
@@ -101,11 +101,6 @@ class Game
 
   def winner?
     person.score == score || computer.score == score
-  end
-
-  def choose_type
-    Type.explain
-    Type.choose
   end
 
   def play
