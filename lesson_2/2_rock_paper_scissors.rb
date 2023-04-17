@@ -245,13 +245,14 @@ class Water < Move
 end
 
 class TypeChooser
-  TYPES = {1 => Classic, 2 => RoShamBo, 3 => RPSSL}
-  attr_reader :type
   def initialize
+    @types = {1 => Classic, 2 => RoShamBo, 3 => RPSSL}
     explain
     @type = choose
-
   end
+
+  private
+  attr_reader :types, :type
 
   def explain
     choice = nil
@@ -263,18 +264,18 @@ class TypeChooser
       Prompt.clear
       break unless valid?(choice)
 
-      type = TYPES[choice]
+      type = types[choice]
       puts type.rules
       Prompt.continue
     end
   end
 
   def valid?(choice)
-    TYPES.key?(choice)
+    types.key?(choice)
   end
 
   def display
-    TYPES.each {|k,t| puts "#{k}: #{t.name}" }
+    types.each {|k,t| puts "#{k}: #{t.name}" }
   end
 
   def choose
@@ -289,7 +290,7 @@ class TypeChooser
       puts "Not a valid choice, please choose again."
     end
 
-    type = TYPES[choice]
+    type = types[choice]
     puts "You chose #{type}."
     Prompt.continue
     return type
