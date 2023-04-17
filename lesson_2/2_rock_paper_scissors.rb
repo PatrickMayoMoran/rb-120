@@ -245,6 +245,8 @@ class Water < Move
 end
 
 class TypeChooser
+  attr_reader :type
+
   def initialize
     @types = {1 => Classic, 2 => RoShamBo, 3 => RPSSL}
     explain
@@ -252,7 +254,7 @@ class TypeChooser
   end
 
   private
-  attr_reader :types, :type
+  attr_reader :types
 
   def explain
     choice = nil
