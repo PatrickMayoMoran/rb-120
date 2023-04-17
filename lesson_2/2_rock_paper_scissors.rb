@@ -1,6 +1,6 @@
 module Prompt
   def self.continue
-    puts "========================="
+    puts "=" * 60
     puts "Press enter to continue: "
     gets
     clear
@@ -260,13 +260,13 @@ class TypeChooser
       display
       puts "Enter 1, 2, or 3 to read the rules for that type. Enter anything else to continue."
       choice = gets.chomp.to_i
+      Prompt.clear
       break unless valid?(choice)
 
       type = TYPES[choice]
       puts type.rules
       Prompt.continue
     end
-    Prompt.clear
   end
 
   def valid?(choice)
