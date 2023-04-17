@@ -165,7 +165,6 @@ class TypeChooser
       choice = gets.chomp.to_i
       Prompt.clear
       break unless valid?(choice)
-
       type = types[choice]
       puts type.rules
       Prompt.continue
@@ -217,28 +216,30 @@ class GameSettings
 
   private
 
-  def choose_score_heredoc
-    <<~HEREDOC
-    1) Best of 1
-    3) Best of 3
-    5) Best of 5
-    HEREDOC
+  def score_options
+    [1, 3, 5]
+  end
+
+  def display_score_options
+    score_options.each do |s|
+      puts "#{s}) Best of #{s}"
+    end
   end
 
   def validate_score
     choice = nil
     loop do
       choice = gets.chomp.to_i
-      break if [1, 3, 5].include?(choice)
+      break if score_options.include?(choice)
       Prompt.clear
-      puts "Not a valid choice - please choose 1, 3, or 5."
+      puts "Not a valid choice - please choose #{score_options}."
     end
     choice
   end
 
   def choose_score
     puts "What score would you like to play to?"
-    puts choose_score_heredoc
+    display_score_options
     choice = validate_score
     puts "You chose #{choice}."
     Prompt.continue
