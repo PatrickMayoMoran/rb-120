@@ -45,7 +45,7 @@ class GameSettings
   end
 
   def choose_type
-    raise NotImplementedError
+    TypeChooser.new
   end
 
 
@@ -185,53 +185,6 @@ class RPSSL
 end
 
 
-class TypeChooser
-
-  attr_reader :moves
-
-  def self.explain
-    choice = nil
-    loop do
-      puts "There are three types of game to choose from: "
-      self.display
-      puts "Enter 1, 2, or 3 to read the rules for that type. Enter anything else to continue."
-      choice = gets.chomp.to_i
-      break unless valid?(choice)
-
-      type = TYPES[choice]
-      puts type.rules
-      Prompt.continue
-    end
-    Prompt.clear
-  end
-
-  def self.valid?(choice)
-    TYPES.key?(choice)
-  end
-
-  def self.display
-    TYPES.each {|k,t| puts "#{k}: #{t.name}" }
-  end
-
-  def self.choose
-    choice = nil
-    loop do
-      puts "Please enter 1, 2, or 3 to choose your game type:"
-      self.display
-      choice = gets.chomp.to_i
-      break if valid?(choice)
-
-      Prompt.clear
-      puts "Not a valid choice, please choose again."
-    end
-
-    type = TYPES[choice]
-    puts "You chose #{type}."
-    Prompt.continue
-    return type
-  end
-
-end
 
 
 class Move
@@ -310,6 +263,58 @@ end
 class RPSSL
   MOVES = Classic::MOVES + [Spock, Lizard]
 end
+
+class TypeChooser
+
+  attr_reader :moves
+  def initialize
+    explain
+
+  end
+
+  def explain
+    choice = nil
+    loop do
+      puts "There are three types of game to choose from: "
+      self.display
+      puts "Enter 1, 2, or 3 to read the rules for that type. Enter anything else to continue."
+      choice = gets.chomp.to_i
+      break unless valid?(choice)
+
+      type = TYPES[choice]
+      puts type.rules
+      Prompt.continue
+    end
+    Prompt.clear
+  end
+
+  def self.valid?(choice)
+    TYPES.key?(choice)
+  end
+
+  def self.display
+    TYPES.each {|k,t| puts "#{k}: #{t.name}" }
+  end
+
+  def self.choose
+    choice = nil
+    loop do
+      puts "Please enter 1, 2, or 3 to choose your game type:"
+      self.display
+      choice = gets.chomp.to_i
+      break if valid?(choice)
+
+      Prompt.clear
+      puts "Not a valid choice, please choose again."
+    end
+
+    type = TYPES[choice]
+    puts "You chose #{type}."
+    Prompt.continue
+    return type
+  end
+end
+
 class Player
   attr_accessor :score
 
