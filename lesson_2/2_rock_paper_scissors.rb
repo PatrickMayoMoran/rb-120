@@ -234,6 +234,7 @@ class Engine
     Prompt.continue
     loop do
       self.settings = choose_settings
+      # Extra loop for playing another game with same settings
       start_game(settings)
       break # unless play_again?
     end
