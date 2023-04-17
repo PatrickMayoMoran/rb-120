@@ -193,7 +193,6 @@ class GameSettings
   def initialize
     @score = choose_score
     @type = choose_type
-    binding.pry
     @moves = type.moves
   end
 
