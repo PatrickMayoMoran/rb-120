@@ -244,17 +244,6 @@ class Water < Move
   def loses; [Paper, Spock, Rock, Scissors, Lizard]; end
 end
 
-class Classic
-  MOVES = [Rock, Paper, Scissors]
-end
-
-class RoShamBo
-  MOVES = Classic::MOVES + [Water, Fire]
-end
-class RPSSL
-  MOVES = Classic::MOVES + [Spock, Lizard]
-end
-
 class TypeChooser
   TYPES = {1 => Classic, 2 => RoShamBo, 3 => RPSSL}
   attr_reader :moves
