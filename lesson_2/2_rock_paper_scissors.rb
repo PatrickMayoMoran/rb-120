@@ -227,7 +227,7 @@ class Type
 
       Prompt.clear
       puts "Not a valid choice, please choose again."
-      end
+    end
 
     type = TYPES[choice]
     puts "You chose #{type}."
