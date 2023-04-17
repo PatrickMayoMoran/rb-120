@@ -295,7 +295,7 @@ class TypeChooser
     type = types[choice]
     puts "You chose #{type}."
     Prompt.continue
-    return type
+    type
   end
 end
 
