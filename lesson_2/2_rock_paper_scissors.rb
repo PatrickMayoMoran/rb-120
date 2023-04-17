@@ -148,9 +148,11 @@ class TypeChooser
   attr_reader :types
 
   def explain_heredoc
-    <<~HEREDOC
+    puts <<~HEREDOC
     There are three types of game to choose from:
-    #{display}
+    HEREDOC
+    display
+    puts <<~HEREDOC
     Enter 1, 2, or 3 to read the rules for that type.
     Enter anything else to continue.
     HEREDOC
@@ -158,8 +160,8 @@ class TypeChooser
 
   def explain
     choice = nil
-    puts explain_heredoc
     loop do
+      explain_heredoc
       choice = gets.chomp.to_i
       Prompt.clear
       break unless valid?(choice)
