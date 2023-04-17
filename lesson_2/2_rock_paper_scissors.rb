@@ -11,6 +11,186 @@ module Prompt
   end
 end
 
+class Move
+  include Comparable
+
+  def initialize
+    @beats = beats
+    @loses = loses
+  end
+
+  def <=>(other)
+    1  if beats?(other)
+    -1 if loses?(other)
+    0  if ties?(other)
+  end
+
+  def beats?(other)
+    true if beats.include?(other.class)
+  end
+
+  def loses?(other)
+    true if loses.include?(other.class)
+  end
+
+  def ties?(other)
+    self.class == other.class
+  end
+
+  def beats; raise NotImplementedError; end
+
+  def loses; raise NotImplementedError; end
+end
+
+class Rock < Move
+  def beats; [Scissors, Lizard, Water]; end
+  def loses; [Paper, Spock, Fire]; end
+end
+
+class Scissors < Move
+  def beats; [Paper, Lizard, Water]; end
+  def loses; [Rock, Spock, Fire]; end
+end
+
+class Paper < Move
+  def beats; [Rock, Spock, Water]; end
+  def loses; [Scissors, Lizard, Fire]; end
+end
+
+class Spock < Move
+  def beats; [Rock, Scissors, Water]; end
+  def loses; [Paper, Lizard, Fire]; end
+end
+
+class Lizard < Move
+  def beats; [Paper, Spock, Water]; end
+  def loses; [Rock, Scissors, Fire]; end
+end
+
+class Fire < Move
+  def beats; [Paper, Spock, Rock, Scissors, Lizard]; end
+  def loses; [Water]; end
+end
+
+class Water < Move
+  def beats; [Fire]; end
+  def loses; [Paper, Spock, Rock, Scissors, Lizard]; end
+end
+
+class Classic
+  attr_reader :moves
+
+  def initialize
+    @moves = [Rock, Paper, Scissors]
+  end
+
+  def self.rules
+    <<~HEREDOC
+    Classic Rock, Paper, Scissors works as follows:
+      Rock beats Scissors
+      Scissors beats Paper
+      Paper beats Rock
+    HEREDOC
+  end
+end
+
+class RoShamBo
+  attr_reader :moves
+
+  def initialize
+    @moves = [Rock, Paper, Scissors, Fire, Water]
+  end
+
+  def self.rules
+    <<~HEREDOC
+    RoShamBo works as follows:
+      Rock beats Scissors
+      Scissors beats Paper
+      Paper beats Rock
+      Fire beats everything but Water
+      Water loses to everything but Fire
+      You can choose Water as many times as you want
+      You can only use Fire once
+    HEREDOC
+  end
+end
+
+class RPSSL
+  attr_reader :moves
+
+  def initialize
+    @moves = [Rock, Paper, Scissors, Spock, Lizard]
+  end
+
+  def self.rules
+    <<~HEREDOC
+    Rock, Paper, Scissors, Spock, Lizard works as follows:
+      Rock beats Scissors and Lizard
+      Scissors beats Paper and Lizard
+      Paper beats Rock and Spock
+      Lizard beats Paper and Spock
+      Spock beats Scissors and Rock
+    HEREDOC
+  end
+end
+
+class TypeChooser
+  attr_reader :type
+
+  def initialize
+    @types = { 1 => Classic, 2 => RoShamBo, 3 => RPSSL }
+    explain
+    @type = choose
+  end
+
+  private
+
+  attr_reader :types
+
+  def explain
+    choice = nil
+    loop do
+      puts "There are three types of game to choose from: "
+      display
+      puts "Enter 1, 2, or 3 to read the rules for that type."
+      puts "Enter anything else to continue."
+      choice = gets.chomp.to_i
+      Prompt.clear
+      break unless valid?(choice)
+
+      type = types[choice]
+      puts type.rules
+      Prompt.continue
+    end
+  end
+
+  def valid?(choice)
+    types.key?(choice)
+  end
+
+  def display
+    types.each { |k, t| puts "#{k}: #{t.name}" }
+  end
+
+  def choose
+    choice = nil
+    loop do
+      puts "Please enter 1, 2, or 3 to choose your game type:"
+      display
+      choice = gets.chomp.to_i
+      break if valid?(choice)
+
+      Prompt.clear
+      puts "Not a valid choice, please choose again."
+    end
+
+    type = types[choice]
+    puts "You chose #{type}."
+    Prompt.continue
+    type
+  end
+end
+
 class GameSettings
   attr_reader :score, :type, :moves
 
@@ -108,186 +288,6 @@ class Game
     c = computer.move
     person.score += 1 if p > c
     computer.score += 1 if c > p
-  end
-end
-
-class Classic
-  attr_reader :moves
-
-  def initialize
-    @moves = [Rock, Paper, Scissors]
-  end
-
-  def self.rules
-    <<~HEREDOC
-    Classic Rock, Paper, Scissors works as follows:
-      Rock beats Scissors
-      Scissors beats Paper
-      Paper beats Rock
-    HEREDOC
-  end
-end
-
-class RoShamBo
-  attr_reader :moves
-
-  def initialize
-    @moves = [Rock, Paper, Scissors, Fire, Water]
-  end
-
-  def self.rules
-    <<~HEREDOC
-    RoShamBo works as follows:
-      Rock beats Scissors
-      Scissors beats Paper
-      Paper beats Rock
-      Fire beats everything but Water
-      Water loses to everything but Fire
-      You can choose Water as many times as you want
-      You can only use Fire once
-    HEREDOC
-  end
-end
-
-class RPSSL
-  attr_reader :moves
-
-  def initialize
-    @moves = [Rock, Paper, Scissors, Spock, Lizard]
-  end
-
-  def self.rules
-    <<~HEREDOC
-    Rock, Paper, Scissors, Spock, Lizard works as follows:
-      Rock beats Scissors and Lizard
-      Scissors beats Paper and Lizard
-      Paper beats Rock and Spock
-      Lizard beats Paper and Spock
-      Spock beats Scissors and Rock
-    HEREDOC
-  end
-end
-
-class Move
-  include Comparable
-
-  def initialize
-    @beats = beats
-    @loses = loses
-  end
-
-  def <=>(other)
-    1  if beats?(other)
-    -1 if loses?(other)
-    0  if ties?(other)
-  end
-
-  def beats?(other)
-    true if beats.include?(other.class)
-  end
-
-  def loses?(other)
-    true if loses.include?(other.class)
-  end
-
-  def ties?(other)
-    self.class == other.class
-  end
-
-  def beats; raise NotImplementedError; end
-
-  def loses; raise NotImplementedError; end
-end
-
-class Rock < Move
-  def beats; [Scissors, Lizard, Water]; end
-  def loses; [Paper, Spock, Fire]; end
-end
-
-class Scissors < Move
-  def beats; [Paper, Lizard, Water]; end
-  def loses; [Rock, Spock, Fire]; end
-end
-
-class Paper < Move
-  def beats; [Rock, Spock, Water]; end
-  def loses; [Scissors, Lizard, Fire]; end
-end
-
-class Spock < Move
-  def beats; [Rock, Scissors, Water]; end
-  def loses; [Paper, Lizard, Fire]; end
-end
-
-class Lizard < Move
-  def beats; [Paper, Spock, Water]; end
-  def loses; [Rock, Scissors, Fire]; end
-end
-
-class Fire < Move
-  def beats; [Paper, Spock, Rock, Scissors, Lizard]; end
-  def loses; [Water]; end
-end
-
-class Water < Move
-  def beats; [Fire]; end
-  def loses; [Paper, Spock, Rock, Scissors, Lizard]; end
-end
-
-class TypeChooser
-  attr_reader :type
-
-  def initialize
-    @types = { 1 => Classic, 2 => RoShamBo, 3 => RPSSL }
-    explain
-    @type = choose
-  end
-
-  private
-
-  attr_reader :types
-
-  def explain
-    choice = nil
-    loop do
-      puts "There are three types of game to choose from: "
-      display
-      puts "Enter 1, 2, or 3 to read the rules for that type."
-      puts "Enter anything else to continue."
-      choice = gets.chomp.to_i
-      Prompt.clear
-      break unless valid?(choice)
-
-      type = types[choice]
-      puts type.rules
-      Prompt.continue
-    end
-  end
-
-  def valid?(choice)
-    types.key?(choice)
-  end
-
-  def display
-    types.each { |k, t| puts "#{k}: #{t.name}" }
-  end
-
-  def choose
-    choice = nil
-    loop do
-      puts "Please enter 1, 2, or 3 to choose your game type:"
-      display
-      choice = gets.chomp.to_i
-      break if valid?(choice)
-
-      Prompt.clear
-      puts "Not a valid choice, please choose again."
-    end
-
-    type = types[choice]
-    puts "You chose #{type}."
-    Prompt.continue
-    type
   end
 end
 
