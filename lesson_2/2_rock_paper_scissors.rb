@@ -43,6 +43,12 @@ class GameSettings
     Prompt.continue
     choice
   end
+
+  def choose_type
+    raise NotImplementedError
+  end
+
+
 end
 
 class Engine
@@ -179,7 +185,7 @@ class RPSSL
 end
 
 
-class Type
+class TypeChooser
 
   attr_reader :moves
 
