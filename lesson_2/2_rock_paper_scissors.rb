@@ -1,3 +1,5 @@
+require 'pry'
+
 module Prompt
   def self.continue
     puts "=" * 60
@@ -78,10 +80,8 @@ class Water < Move
 end
 
 class Classic
-  attr_reader :moves
-
-  def initialize
-    @moves = [Rock, Paper, Scissors]
+  def self.moves
+    [Rock, Paper, Scissors]
   end
 
   def self.rules
@@ -95,10 +95,8 @@ class Classic
 end
 
 class RoShamBo
-  attr_reader :moves
-
-  def initialize
-    @moves = [Rock, Paper, Scissors, Fire, Water]
+  def self.moves
+    [Rock, Paper, Scissors, Fire, Water]
   end
 
   def self.rules
@@ -116,11 +114,9 @@ class RoShamBo
 end
 
 class RPSSL
-  attr_reader :moves
-
-  def initialize
-    @moves = [Rock, Paper, Scissors, Spock, Lizard]
-  end
+    def self.moves
+      [Rock, Paper, Scissors, Spock, Lizard]
+    end
 
   def self.rules
     <<~HEREDOC
@@ -197,6 +193,7 @@ class GameSettings
   def initialize
     @score = choose_score
     @type = choose_type
+    binding.pry
     @moves = type.moves
   end
 
