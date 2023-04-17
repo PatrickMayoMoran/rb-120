@@ -2,10 +2,14 @@ require 'pry'
 
 module Prompt
   def self.continue
-    puts "=" * 60
+    horizontal_rule
     puts "Press enter to continue: "
     gets
     clear
+  end
+
+  def self.horizontal_rule
+    puts "=" * 60
   end
 
   def self.clear
@@ -143,13 +147,19 @@ class TypeChooser
 
   attr_reader :types
 
+  def explain_heredoc
+    <<~HEREDOC
+    There are three types of game to choose from:
+    #{display}
+    Enter 1, 2, or 3 to read the rules for that type.
+    Enter anything else to continue.
+    HEREDOC
+  end
+
   def explain
     choice = nil
+    puts explain_heredoc
     loop do
-      puts "There are three types of game to choose from: "
-      display
-      puts "Enter 1, 2, or 3 to read the rules for that type."
-      puts "Enter anything else to continue."
       choice = gets.chomp.to_i
       Prompt.clear
       break unless valid?(choice)
@@ -175,7 +185,6 @@ class TypeChooser
       display
       choice = gets.chomp.to_i
       break if valid?(choice)
-
       Prompt.clear
       puts "Not a valid choice, please choose again."
     end
@@ -202,15 +211,19 @@ class GameSettings
 
   private
 
+  def choose_score_heredoc
+    <<~HEREDOC
+    1) Best of 1
+    3) Best of 3
+    5) Best of 5
+    HEREDOC
+  end
+
   def choose_score
     puts "What score would you like to play to?"
+    puts choose_score_heredoc
     choice = nil
     loop do
-      puts <<~HEREDOC
-      1) Best of 1
-      3) Best of 3
-      5) Best of 5
-      HEREDOC
       choice = gets.chomp.to_i
       break if [1, 3, 5].include?(choice)
       Prompt.clear
