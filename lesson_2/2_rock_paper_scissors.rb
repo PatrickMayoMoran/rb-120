@@ -19,6 +19,10 @@ class GameSettings
     @moves = type.moves
   end
 
+  def config
+    {score: score, type: type, moves: moves}
+  end
+
   private
   def choose_score
     puts "What score would you like to play to?"
@@ -67,7 +71,7 @@ class Engine
   attr_accessor :settings
 
   def get_game_settings
-    settings = GameSettings.new
+    settings = GameSettings.new.config
   end
 
   def start_game
