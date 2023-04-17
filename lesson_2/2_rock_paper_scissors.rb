@@ -217,7 +217,7 @@ class GameSettings
   private
 
   def score_options
-    [1, 3, 5, 7, 9]
+    [1, 3, 5]
   end
 
   def display_score_options
