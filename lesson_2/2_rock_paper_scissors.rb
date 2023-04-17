@@ -228,6 +228,11 @@ class GameSettings
   end
 end
 
+class GameFactory
+  def initialize(settings)
+  end
+end
+
 class Engine
   def initialize
     greet
